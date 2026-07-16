@@ -1,5 +1,5 @@
 (() => {
-  const STORAGE_KEY = "bug-handling-sop-progress-v1";
+  const STORAGE_KEY = "bug-handling-sop-progress-v2";
   const THEME_KEY = "bug-handling-sop-theme";
 
   const MODULES = [
@@ -59,7 +59,13 @@
 [Attach or link here]
 
 **Business / User Impact**
-[Who is affected and how severely]`;
+[Who is affected and how severely; note any workaround]
+
+**Suggested Severity** (optional — triage confirms)
+<!-- severity/s1 | severity/s2 | severity/s3 | severity/s4 -->
+
+**Suggested Priority** (optional — triage confirms)
+<!-- priority/p0 | priority/p1 | priority/p2 | priority/p3 -->`;
 
   const body = document.body;
   const base = body.dataset.base || "";

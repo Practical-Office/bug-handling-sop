@@ -59,7 +59,7 @@ If Setup is incomplete for most of the room, spend Block 0 verifying installs be
 - Separate Severity (impact) from Priority (schedule) — kill P1–P4-as-impact habits.
 - Walk Triage Category + State machine; work starts only at `ready-for-*`.
 - Security: private advisory path (no exploit details in public issues).
-- Calibration Exercise B (four scenarios).
+- Calibration Exercise B (five scenarios).
 
 ### Block 3 — Diagnosis (45m)
 
@@ -71,8 +71,10 @@ If Setup is incomplete for most of the room, spend Block 0 verifying installs be
 ### Block 4 — Fix (30m)
 
 - `/tdd` rules for bugs: agree seams, regression first when seam exists, minimal fix.
-- Demo or walk red → green on the lab (or outline if time-boxed).
+- **Timebox default:** sketch-first — failing test sketch + minimal fix outline on paper; full green is homework unless the room is fast.
+- Demo or walk red → green on the lab when time allows.
 - Emphasize re-running the original un-minimised Phase 1 command.
+- Ticketed AFK work may use `/implement`, which drives `/tdd` then `/code-review`.
 
 ### Block 5 — Review & Prevention (25m)
 

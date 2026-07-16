@@ -38,7 +38,7 @@ python3 -m http.server 4174
 
 Open http://localhost:4174/
 
-Progress checklists persist in `localStorage` (`bug-handling-sop-progress-v1`). Use **Reset progress** in the top bar to clear.
+Progress checklists persist in `localStorage` (`bug-handling-sop-progress-v2`). Use **Reset progress** in the top bar to clear.
 
 ## Deploy (GitHub Pages)
 

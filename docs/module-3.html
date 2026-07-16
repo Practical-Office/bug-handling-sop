@@ -187,6 +187,21 @@ npm install</code></pre>
             <p>Stop here. Module 4 continues the same lab through red → green.</p>
           </div>
 
+          <div class="section-card self-check">
+            <h3>Sample ranked hypotheses (facilitator key)</h3>
+            <p>One valid ranking for the Invoice API lab — not the only answer. Use after pairs draft their own list.</p>
+            <button type="button" class="btn btn-ghost btn-sm" data-reveal="m3-hyp-key">Show sample ranking</button>
+            <div class="reveal-answer" id="m3-hyp-key">
+              <ol>
+                <li><strong>Timezone normalization strips or mis-parses <code>asOf</code> when <code>Accept-Timezone</code> is present</strong> — if we log parsed filter date with/without header, empty list should correlate with a wrong cutoff.</li>
+                <li><strong>Header branch short-circuits to empty before query runs</strong> — if we instrument the list handler entry, we should see early return only when the header is set.</li>
+                <li><strong>Filter compares instants in wrong zone so all rows fall outside range</strong> — differential log of row timestamps vs filter bounds should show 100% exclusion with header.</li>
+                <li><strong>Fixture data keyed to “no header” path only</strong> — less likely if baseline without header returns three rows from same dataset.</li>
+                <li><strong>HTTP layer drops header before handler</strong> — probe at handler should still see <code>Accept-Timezone</code> if middleware is innocent.</li>
+              </ol>
+            </div>
+          </div>
+
           <div class="section-card">
             <h3>Facilitator demo (optional)</h3>
             <ol>
