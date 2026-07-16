@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 5 — Review | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="module-5" data-base="" data-file="module-5.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Module 5 — Review</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="module" id="module-5">
+          <div class="module-header">
+            <div class="module-badge">5</div>
+            <div>
+              <h2>Review &amp; prevention</h2>
+              <p class="module-time">~30 min</p>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Learning objectives</h3>
+            <ul>
+              <li>Run <code>/code-review</code> as a <strong>two-axis</strong> review — Standards ‖ Spec — without merging findings across axes.</li>
+              <li>Close every production bug with Root Cause + Prevention on the ticket.</li>
+              <li>Know when ticket notes are enough vs when a thin Incident + Postmortem is required (outage-class <code>severity/s1</code>).</li>
+              <li>Name the process metrics the team tracks and the improvement cadence.</li>
+            </ul>
+          </div>
+
+          <div class="hard-truth">
+            <h3>Hard truth</h3>
+            <p>A clean diff that fixes the wrong symptom ships confidently wrong behavior. Spec without Standards leaves landmines. Closing without Prevention guarantees the same bug class returns.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Closure workflow</h3>
+            <ol>
+              <li>Open a PR that references the ticket and states the <strong>winning hypothesis</strong>.</li>
+              <li>Run <code>/code-review</code> (Standards ‖ Spec) against a pinned fixed point.</li>
+              <li>Address feedback on both axes.</li>
+              <li>Update the ticket with <strong>Root Cause</strong> + <strong>Prevention</strong> (template below).</li>
+              <li><strong>QA verifies</strong> the fix (Fixed → Verified) before true close.</li>
+              <li>Close ticket and PR. File architecture / monitoring / docs follow-ups as <em>separate</em> tickets when needed.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3><code>/code-review</code> — Standards ‖ Spec</h3>
+            <p>Mandatory for production bug PRs. Run <strong>two axes in parallel</strong> — do not merge or re-rank findings across axes:</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Axis</th><th>Question</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Standards</strong></td><td>Does the diff follow repo coding standards and smell baseline?</td></tr>
+                  <tr><td><strong>Spec</strong></td><td>Does the diff faithfully fix the originating issue (right behavior)?</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Process essentials</strong></p>
+            <ol>
+              <li>Pin a fixed point (<code>main</code>, merge-base, or SHA). Confirm a non-empty three-dot diff.</li>
+              <li>Identify the <strong>spec source</strong> (issue refs, PR description, acceptance criteria).</li>
+              <li>Identify <strong>standards sources</strong> (<code>CODING_STANDARDS.md</code>, <code>CONTRIBUTING.md</code>, repo conventions).</li>
+              <li>Spawn parallel Standards and Spec reviews.</li>
+              <li>Aggregate under <strong>separate headings</strong>; one-line summary per axis — never re-rank across axes.</li>
+            </ol>
+            <p><strong>Why both axes matter for bugs</strong></p>
+            <ul>
+              <li>Clean code that fixes the wrong symptom → Standards pass, Spec fail.</li>
+              <li>Exact fix that ignores project conventions → Spec pass, Standards fail.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Root Cause + Prevention (mandatory)</h3>
+            <p>Every closed production bug includes both fields on the ticket. Prefer causal mechanism over labels like “null pointer.”</p>
+            <pre class="code-block"><code>## Closure
+
+**Root Cause:**
+[Mechanism — what broke and why.]
+
+**Prevention:**
+- [ ] Regression test at seam: …
+- [ ] Guard / validation: …
+- [ ] Docs / CONTEXT.md term clarified: …
+- [ ] Follow-up architecture ticket (if seam missing): …</code></pre>
+            <p><strong>Example Root Cause:</strong> “Timezone offset from Safari was sent as <code>undefined</code> after refresh; server rejected the header; UI treated the error body as an empty invoice list.”</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Incident + Postmortem (thin rules)</h3>
+            <p>Most bugs follow report → triage → diagnosis → fix → review → close only. Escalate to <strong>Incident</strong> handling when:</p>
+            <ul>
+              <li>Customer-visible outage or data loss</li>
+              <li>Multi-team response required</li>
+              <li>Concentrated investigation stuck beyond a short window without a restore path</li>
+              <li>On-call / monitoring failure that hid the issue</li>
+            </ul>
+            <p><strong>Incident (thin)</strong></p>
+            <ul>
+              <li>Declare explicitly; restore service <strong>first</strong>, deep RCA second.</li>
+              <li>Keep a live state note (what’s known, what’s tried, next action, owner).</li>
+              <li>Do <strong>not</strong> fold full ICS / war-room role theatre into routine Diagnosis Loop work.</li>
+            </ul>
+            <p><strong>Postmortem</strong></p>
+            <ul>
+              <li>Required for <strong>outage-class</strong> <code>severity/s1</code> Incidents (user-visible downtime, data loss, on-call intervention, long time-to-mitigate, monitoring miss).</li>
+              <li>Blameless write-up with <strong>owned</strong> preventive actions and a review pass — above-and-beyond ticket Root Cause + Prevention.</li>
+              <li>Routine bugs: ticket RCA + Prevention is enough. Not every <code>severity/s1</code> label needs a Postmortem if it was not an Incident.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Metrics &amp; continuous improvement</h3>
+            <p>Prefer Severity labels (<code>severity/s*</code>). Do not use a mixed P1–P4 impact scale as the primary dimension.</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Metric</th><th>Why</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Avg time report → fix (by <code>severity/s*</code>)</td><td>Velocity vs impact</td></tr>
+                  <tr><td>% bugs meeting triage SLAs (S1 ≤1h, S2 ≤4h)</td><td>Hot-path responsiveness</td></tr>
+                  <tr><td>% bugs with reproduction steps / red Phase 1 command</td><td>Intake + diagnosis quality</td></tr>
+                  <tr><td>% fixes with regression tests</td><td>Prevention muscle</td></tr>
+                  <tr><td>Recurring bug rate (same class)</td><td>Are Prevention notes working?</td></tr>
+                  <tr><td><code>needs-info</code> close rate / age</td><td>Stale intake health</td></tr>
+                  <tr><td>Team feedback on process</td><td>SOP fitness</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Cadence:</strong> each engineer completes 1–2 real bugs with the full process post-training; monthly bug-process retro; quarterly Living SOP review; Severity/Priority calibration after major misses.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Paper Exercise E — Two-axis review</h3>
+            <p>Fictional PR description: <em>“Fixed empty invoices by removing Accept-Timezone support globally.”</em></p>
+            <p>List at least:</p>
+            <ul>
+              <li><strong>Spec</strong> findings (vs the bug: the header should be honored, not removed).</li>
+              <li><strong>Standards</strong> findings (speculative generality / shotgun surgery if many call sites changed).</li>
+            </ul>
+            <p><strong>Pass criteria:</strong> at least one Spec fail on “remove header globally.”</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Live practice</h3>
+            <ol>
+              <li>Run <code>/code-review</code> against a training or Exercise Lab PR; classify each finding as Standards or Spec.</li>
+              <li>Write a one-sentence Prevention note for a past painful bug, then expand to three concrete actions (test, guard, docs/follow-up).</li>
+            </ol>
+            <p>Ready to certify? Build your <a href="certification.html">Evidence Pack</a>.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Checklist</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-progress="m5-c1" data-module="module-5" /><span>I can run <code>/code-review</code> as Standards ‖ Spec without merging axes.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m5-c2" data-module="module-5" /><span>I will document Root Cause + Prevention on every closed production bug.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m5-c3" data-module="module-5" /><span>I know when ticket RCA is enough vs when an outage-class Postmortem is required.</span></label></li>
+            </ul>
+          </div>
+
+          <div class="section-card self-check">
+            <h3>Self-check</h3>
+            <div class="self-check-item">
+              <p>A PR removes <code>Accept-Timezone</code> support entirely to “fix” empty invoices. Which axis fails first, and why?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc5-1">Show answer</button>
+              <div class="reveal-answer" id="sc5-1">Spec fails: the originating bug requires honoring the header, not deleting the feature. Standards may also fail if the change is shotgun surgery across many call sites — list those separately; do not merge axes.</div>
+            </div>
+            <div class="self-check-item">
+              <p>When is a Postmortem required beyond ticket Root Cause + Prevention?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc5-2">Show answer</button>
+              <div class="reveal-answer" id="sc5-2">For outage-class <code>severity/s1</code> Incidents (user-visible downtime, data loss, on-call intervention, long TTM, monitoring miss) — not for every routine bug that happens to carry an S1 label.</div>
+            </div>
+          </div>
+        </section>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

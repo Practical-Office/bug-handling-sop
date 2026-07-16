@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Module 3 — Diagnosis &amp; fixing | Bug Handling SOP</title>
+  <title>Module 3 — Diagnosis | Bug Handling SOP</title>
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,7 @@
     <div class="main">
       <header class="topbar no-print">
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div class="topbar-title">Module 3</div>
+        <div class="topbar-title">Module 3 — Diagnosis</div>
         <div class="topbar-actions">
           <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
         </div>
@@ -27,78 +27,198 @@
           <div class="module-header">
             <div class="module-badge">3</div>
             <div>
-              <h2>Diagnosis &amp; fixing with skills</h2>
-              <p class="module-time">~30–40 min <span style="color:var(--ink-faint)">(may split later)</span></p>
+              <h2>Diagnosis Mastery</h2>
+              <p class="module-time">~45 min</p>
             </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Learning objectives</h3>
+            <ul>
+              <li>Run <code>/diagnosing-bugs</code> through all six phases — skip only when explicitly justified.</li>
+              <li>Build a <strong>tight, red-capable, agent-runnable</strong> feedback loop <em>before</em> hypothesising.</li>
+              <li>Produce 3–5 falsifiable, ranked hypotheses and instrument one variable at a time.</li>
+              <li>Use the in-repo <a href="https://github.com/Practical-Office/bug-handling-sop/tree/main/exercises/invoice-api">Exercise Lab</a> — not a product backlog ticket.</li>
+            </ul>
           </div>
 
           <div class="hard-truth">
             <h3>Hard truth</h3>
-            <p>Diagnosis without a minimized reproduction is guessing. TDD without a failing test first is theater.</p>
+            <p>Diagnosis without a minimized reproduction is guessing. Jumping to a theory before a red-capable command exists is the failure mode this skill exists to prevent.</p>
           </div>
 
           <div class="section-card">
-            <h3>Mandatory skills</h3>
+            <h3>Skill &amp; principle</h3>
             <ul>
-              <li><code>/diagnosing-bugs</code> — core diagnostic loop</li>
-              <li><code>/tdd</code> — red → green → refactor for every fix</li>
+              <li><strong>Mandatory skill:</strong> <code>/diagnosing-bugs</code> — the Diagnosis Loop (six phases; feedback loop first).</li>
+              <li><strong>Reproducibility First</strong> is a <em>principle</em>, satisfied by Phases 1–2. It is not a competing “reproduce then patch” shortcut that replaces Matt’s order.</li>
+              <li><strong>Hand-off:</strong> stop before the production fix — Module 4 owns <code>/tdd</code> and the green path. Phase 5 here means <em>knowing</em> where the regression test and fix land.</li>
+            </ul>
+            <p>Read <code>CONTEXT.md</code> and relevant ADRs before deep exploration on a real codebase. For this module, the lab README is enough.</p>
+          </div>
+
+          <div class="failure-modes">
+            <h3>Common failure modes</h3>
+            <ul>
+              <li><strong>Hypothesis before loop:</strong> reading code to “get a theory” before any red command exists.</li>
+              <li><strong>Wrong bug:</strong> a loop that fails for a nearby error, not the reporter’s symptom.</li>
+              <li><strong>Flaky / slow loop:</strong> a 30s flake is barely better than no loop; tighten until seconds and deterministic.</li>
+              <li><strong>Product backlog drill:</strong> using live product issues for class practice instead of the Exercise Lab.</li>
+            </ul>
+          </div>
+
+          <!-- ========== Six phases ========== -->
+          <div class="section-card">
+            <h3>Diagnosis Loop — six phases (<code>/diagnosing-bugs</code>)</h3>
+            <p>Order is mandatory. Phase 1 is the skill; everything else consumes the loop.</p>
+            <ol>
+              <li><strong>Build a feedback loop</strong> — one red-capable command you have already run.</li>
+              <li><strong>Reproduce + minimise</strong> — confirm the user’s failure; shrink until every element is load-bearing.</li>
+              <li><strong>Hypothesise</strong> — 3–5 ranked, falsifiable predictions <em>before</em> testing any.</li>
+              <li><strong>Instrument</strong> — one variable at a time; probes map to predictions.</li>
+              <li><strong>Fix + regression test</strong> — failing test at a correct seam (when one exists), then fix; re-run original Phase 1.</li>
+              <li><strong>Cleanup + post-mortem</strong> — remove debug noise; state the winning hypothesis; ask what would have prevented this.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Phase 1 — Build a feedback loop <em>(this is the skill)</em></h3>
+            <p>Spend disproportionate effort here. Be aggressive. Be creative. Refuse to give up.</p>
+            <p>Phase 1 is done when you can name <strong>one command</strong> — a script path, test invocation, or curl — that you have <strong>already run at least once</strong> (paste invocation + output), and that is:</p>
+            <ul>
+              <li><strong>Red-capable</strong> — drives the actual bug path and asserts the reporter’s <em>exact</em> symptom (not merely “didn’t crash”).</li>
+              <li><strong>Deterministic</strong> — same verdict every run (flakes: raise repro rate until debuggable).</li>
+              <li><strong>Fast</strong> — seconds, not minutes.</li>
+              <li><strong>Agent-runnable</strong> — unattended; HITL only via a structured harness if a human must click.</li>
+            </ul>
+            <p><strong>Ways to construct a loop</strong> (try roughly in order): failing test at a seam → curl/HTTP script → CLI + fixture → headless browser → trace replay → throwaway harness → fuzz → bisect harness → differential (old vs new) → HITL last.</p>
+            <p><strong>Tighten:</strong> faster, sharper assertion, more deterministic. A 2-second deterministic loop is a debugging superpower.</p>
+            <p><strong>If you cannot build a loop:</strong> stop. List attempts. Ask for env access, artifacts (HAR, logs, recording), or permission for temporary instrumentation. <strong>Do not proceed to hypothesise without a loop.</strong></p>
+          </div>
+
+          <div class="section-card">
+            <h3>Phase 2 — Reproduce + minimise</h3>
+            <ul>
+              <li>Run the loop. Watch it go red — the bug appears.</li>
+              <li>Confirm it shows the <strong>user’s</strong> failure mode. Wrong bug = wrong fix.</li>
+              <li>Shrink inputs, callers, config, and steps one at a time; re-run after each cut.</li>
+              <li>Done when every remaining element is <strong>load-bearing</strong> — remove any one and the loop goes green.</li>
+            </ul>
+            <p>A minimal repro shrinks the hypothesis space and becomes the clean regression test in Phase 5 / Module 4.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Phase 3 — Hypothesise</h3>
+            <ul>
+              <li>Generate <strong>3–5 ranked</strong> hypotheses before testing any. Single-hypothesis thinking anchors on the first plausible idea.</li>
+              <li>Each must be <strong>falsifiable</strong>. Format: <em>If X is the cause, then changing Y will make the bug disappear / changing Z will make it worse.</em></li>
+              <li>If you cannot state the prediction, the hypothesis is a vibe — discard or sharpen it.</li>
+              <li>Show the ranked list to your partner (or the reporter) when practical — cheap domain re-rank. Don’t block forever if they are AFK.</li>
             </ul>
           </div>
 
           <div class="section-card">
-            <h3>Diagnostic loop (<code>/diagnosing-bugs</code>)</h3>
-            <ol>
-              <li><strong>Reproduce</strong> — confirm the report on a known environment.</li>
-              <li><strong>Minimize</strong> — smallest test case that still fails.</li>
-              <li><strong>Hypothesize</strong> — name a falsifiable cause.</li>
-              <li><strong>Instrument</strong> — add logging or probes that can disprove the hypothesis.</li>
-              <li><strong>Fix</strong> — change only what the evidence supports.</li>
-              <li><strong>Regression test</strong> — lock the behavior so it cannot silently return.</li>
-            </ol>
+            <h3>Phase 4 — Instrument</h3>
+            <ul>
+              <li>Each probe maps to a specific prediction from Phase 3. Change <strong>one variable at a time</strong>.</li>
+              <li>Prefer debugger / REPL → targeted logs → never “log everything and grep.”</li>
+              <li>Tag every debug log with a unique prefix (e.g. <code>[DEBUG-a4f2]</code>) so cleanup is a single grep.</li>
+              <li>Perf bugs: establish a baseline measurement first, then bisect — logs are usually wrong.</li>
+            </ul>
           </div>
 
           <div class="section-card">
-            <h3>Step-by-step workflow</h3>
-            <ol>
-              <li>Acknowledge ticket; set status to <strong>In Progress</strong>.</li>
-              <li>Run <code>/diagnosing-bugs</code>.</li>
-              <li>Create a minimal reproduction if needed.</li>
-              <li>Implement the fix using <code>/tdd</code>.</li>
-              <li>Add or update relevant tests.</li>
-              <li>Document findings in the ticket (partial notes OK before PR).</li>
-            </ol>
+            <h3>Phase 5 — Fix + regression test <span style="font-weight:400">(preview — Module 4 owns the green path)</span></h3>
+            <ul>
+              <li>Prefer writing the regression test <strong>before</strong> the fix when a <strong>correct seam</strong> exists — one that exercises the real bug pattern at the call site.</li>
+              <li>If no correct seam exists, that itself is the finding: document it for architecture follow-up after the fix.</li>
+              <li>After the fix: re-run the <strong>original</strong> Phase 1 loop (un-minimised scenario).</li>
+            </ul>
+            <p>In this module you only <em>name</em> the seam and the Phase 1 command. You do not ship the fix yet.</p>
           </div>
 
           <div class="section-card">
-            <h3>Skills setup (one-time)</h3>
-            <ol>
-              <li>Install Matt Pocock skills: <code>npx skills@latest add mattpocock/skills</code></li>
-              <li>Run <code>/setup-matt-pocock-skills</code> in Cursor (if available).</li>
-              <li>Master: <code>diagnosing-bugs</code>, <code>tdd</code>, <code>triage</code>, <code>code-review</code>, <code>grill-me</code> / <code>grill-with-docs</code>.</li>
-            </ol>
+            <h3>Phase 6 — Cleanup + post-mortem (ticket-level)</h3>
+            <ul>
+              <li>Original Phase 1 loop green; regression test passes (or seam absence documented).</li>
+              <li>All tagged debug instrumentation and throwaway harnesses removed or quarantined.</li>
+              <li>Winning hypothesis stated in the PR / commit message.</li>
+              <li>Ask: what would have prevented this? Park architectural deepening in a follow-up — after the fix is in.</li>
+            </ul>
+          </div>
+
+          <!-- ========== Lab ========== -->
+          <div class="section-card">
+            <h3>Exercise Lab — Invoice API</h3>
+            <p>Practice on the portable training fixture at <a href="https://github.com/Practical-Office/bug-handling-sop/tree/main/exercises/invoice-api"><code>exercises/invoice-api</code></a>. It is <strong>not</strong> product code. Do not use a live product backlog for this drill.</p>
+            <blockquote>
+              <p><strong>Symptom:</strong> <code>GET /v1/invoices?asOf=2026-07-16</code> returns <strong>200 with an empty list</strong> when the client sends an <code>Accept-Timezone</code> header. Without that header, invoices return correctly. (Story: started after a fictional “timezone normalization” PR.)</p>
+            </blockquote>
+            <p><strong>Install once</strong> (from the repo):</p>
+            <pre class="code-block"><code>cd exercises/invoice-api
+npm install</code></pre>
+            <p><strong>Phase 1 red command</strong> (deterministic — no Cursor required):</p>
+            <pre class="code-block"><code>npm run phase1</code></pre>
+            <p><strong>Expected while the bug is present:</strong> exit code <strong>1</strong>; output includes <code>RED — Phase 1 reproduce signal</code>. The script starts an ephemeral server, hits the route with and without <code>Accept-Timezone</code>, then exits.</p>
+            <p>Optional manual curl (after <code>npm start</code> on port <code>3847</code>) is in the lab README — useful for Phase 2 minimisation, but <code>npm run phase1</code> is the canonical Phase 1 completion signal for this course.</p>
           </div>
 
           <div class="section-card">
-            <h3>Paired exercise</h3>
-            <p>With a partner (or agent), pick a sample bug from your product backlog. Run the diagnostic loop out loud through <strong>hypothesize</strong> before writing any fix. Note where you would add the first failing test.</p>
+            <h3>Phase 1 completion criteria (lab)</h3>
+            <p>You may check Phase 1 done for the Exercise Lab when all of the following are true:</p>
+            <ul>
+              <li>You ran <code>npm run phase1</code> from <code>exercises/invoice-api</code> at least once.</li>
+              <li>You captured exit code <strong>1</strong> and the <code>RED — Phase 1 reproduce signal</code> line (paste into notes / Evidence Pack later).</li>
+              <li>You can explain in one sentence which user symptom the script asserts (empty list <em>with</em> <code>Accept-Timezone</code>, non-empty without).</li>
+              <li>You have <strong>not</strong> started writing fix code yet.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Paired exercise (Exercise Lab — not product backlog)</h3>
+            <p>With a partner (or an agent), work the Invoice API bug out loud. <strong>No fix code until your partner agrees Phases 1–3 are honest.</strong></p>
+            <ol>
+              <li>Run <code>npm run phase1</code>. Paste the command and red output into a shared note.</li>
+              <li>State a <strong>minimisation plan</strong> (what you would cut one-at-a-time: headers, query params, data, callers).</li>
+              <li>Write <strong>3–5 ranked falsifiable hypotheses</strong> for the empty-list-with-timezone symptom.</li>
+              <li>Name the <strong>first instrumentation probe</strong> for hypothesis #1 (one variable).</li>
+              <li>Propose the <strong>seam</strong> where the first regression test should live (public API vs list-logic boundary — agree which).</li>
+            </ol>
+            <p>Stop here. Module 4 continues the same lab through red → green.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Facilitator demo (optional)</h3>
+            <ol>
+              <li>Narrate refusal to open product code until a red command exists.</li>
+              <li>Show <code>npm run phase1</code> going red on the lab.</li>
+              <li>Minimise inputs live (header on/off, query params).</li>
+              <li>Write 3–5 hypotheses on a whiteboard; invite re-ranking from the room.</li>
+              <li>Stop before the fix — hand off to Module 4.</li>
+            </ol>
           </div>
 
           <div class="section-card">
             <h3>Checklist</h3>
             <ul class="checklist">
-              <li><label><input type="checkbox" data-progress="m3-c1" data-module="module-3" /><span>I can recite the six diagnostic steps in order.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m3-c2" data-module="module-3" /><span>I know when to use <code>/diagnosing-bugs</code> vs <code>/tdd</code>.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m3-c3" data-module="module-3" /><span>I have Matt skills installed (or a plan to install them today).</span></label></li>
-              <li><label><input type="checkbox" data-progress="m3-c4" data-module="module-3" /><span>I walked a sample bug through hypothesize before fixing.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c1" data-module="module-3" /><span>I can explain why Phase 1 (feedback loop) precedes hypotheses.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c2" data-module="module-3" /><span>I can list the six Diagnosis Loop phases in Matt’s order.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c3" data-module="module-3" /><span>I ran <code>npm run phase1</code> in <code>exercises/invoice-api</code> and saw the red signal (or know the stop conditions when a loop cannot be built).</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c4" data-module="module-3" /><span>I walked the Exercise Lab through hypothesise (and named a seam) before any fix.</span></label></li>
             </ul>
           </div>
 
           <div class="section-card self-check">
             <h3>Self-check</h3>
             <div class="self-check-item">
-              <p>What comes before “Fix” in the diagnostic loop?</p>
+              <p>What comes first in the Diagnosis Loop — and what is Phase 1’s completion criterion?</p>
               <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc3-1">Show answer</button>
-              <div class="reveal-answer" id="sc3-1">Reproduce → Minimize → Hypothesize → Instrument — then Fix, then Regression test.</div>
+              <div class="reveal-answer" id="sc3-1">Phase 1 — Build a feedback loop. Done when one command you have already run is red-capable (asserts the user’s exact symptom), deterministic, fast, and agent-runnable. For this course lab: <code>npm run phase1</code> exiting 1 with <code>RED — Phase 1 reproduce signal</code>.</div>
+            </div>
+            <div class="self-check-item" style="margin-top:1rem">
+              <p>You have a plausible theory from reading <code>invoices.ts</code>. Should you test it now?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc3-2">Show answer</button>
+              <div class="reveal-answer" id="sc3-2">Not until Phase 1 is done. If you catch yourself theorising before a red-capable command exists, stop — that is the failure mode the skill prevents. Run (or build) the loop first; then hypothesise in ranked, falsifiable form.</div>
             </div>
           </div>
         </section>

@@ -24,18 +24,119 @@
       </header>
       <main class="content" id="top">
         <section class="hero">
-          <span class="status-chip">Sign-off</span>
+          <span class="status-chip">Evidence Pack</span>
           <h1>Bug Handling <em>certification</em></h1>
-          <p class="hero-lede">Check each item when true. Share completion with your lead.</p>
+          <p class="hero-lede">Not checkbox-only. Assemble linked proof, self-attest, then get a lead review.</p>
         </section>
+
+        <div class="hard-truth">
+          <h3>What “certified” means</h3>
+          <p>You can run the Five-Module Course end-to-end: report → triage → diagnosis (red Phase 1) → fix → Standards ‖ Spec review → Root Cause + Prevention — and you can show evidence, not just claim it.</p>
+        </div>
+
         <div class="section-card">
+          <h3>Evidence Pack requirements</h3>
+          <p>Submit one pack (gist, PR comment, Notion page, or ticket comment thread) that includes all of the following. Self-attest checkboxes below; a lead must still review the pack.</p>
+          <ol>
+            <li>
+              <strong>Rewritten report OR Paper Exercise A</strong>
+              <ul>
+                <li>Full mandatory template (Title, Environment, Reproduction Steps, Expected, Actual, Logs/Screenshots, Business/User Impact).</li>
+                <li>Either rewrite a real weak report from your work, <em>or</em> complete Exercise A from Module 1 (“Payments flaky for some customers since Tuesday”) with assumptions marked <code>ASSUMPTION:</code>.</li>
+                <li>Link or paste the deliverable in the pack.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Phase 1 command + output</strong>
+              <ul>
+                <li>One red-capable command you have already run that asserts the reporter’s symptom.</li>
+                <li>Source: Exercise Lab (<code>exercises/invoice-api</code> Phase 1 script) <em>or</em> a real bug you diagnosed with <code>/diagnosing-bugs</code>.</li>
+                <li>Include the command line and enough output to show the failure (red signal). No BookIQ product backlog required for course cert.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Root Cause + Prevention</strong>
+              <ul>
+                <li>From a closed ticket <em>or</em> from the Exercise Lab fix path.</li>
+                <li>Use the Living SOP closure template: mechanism (not a vague label) + concrete Prevention actions (regression test, guard, docs, architecture follow-up as applicable).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Lead review</strong>
+              <ul>
+                <li>A team lead (or designated reviewer) confirms the pack meets the three evidence items and that you completed Setup + Modules 1–5 checklists.</li>
+                <li>Lead notes any gaps; pack is not “done” until gaps are closed or explicitly waived in writing.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="section-card">
+          <h3>Suggested pack outline</h3>
+          <pre class="code-block"><code># Evidence Pack — [Your name] — [Date]
+
+## 1. Course completion
+- Setup Pre-req: done
+- Modules 1–5 checklists: done
+- Links to checklist pages or screenshot of progress (optional)
+
+## 2. Report rewrite / Exercise A
+[Paste or link full template]
+
+## 3. Phase 1 command + output
+Command: …
+Red output (trimmed OK): …
+Source: [Exercise Lab | real bug + ticket URL]
+
+## 4. Root Cause + Prevention
+**Root Cause:** …
+**Prevention:**
+- [ ] …
+
+## 5. Lead review
+Reviewer: @…
+Date: …
+Verdict: [approved | needs revision — notes]</code></pre>
+        </div>
+
+        <div class="section-card">
+          <h3>Pass criteria (for leads)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Evidence</th><th>Pass when</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Report / Exercise A</td><td>All template sections present; STR short and actionable; impact specific</td></tr>
+                <tr><td>Phase 1</td><td>Command named; output shows reporter symptom (red); source stated</td></tr>
+                <tr><td>RCA + Prevention</td><td>Causal mechanism + at least one concrete prevention action</td></tr>
+                <tr><td>Lead review</td><td>Explicit approval recorded on the pack</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Self-attest</h3>
+          <p>Check each item when true. These checkboxes are progress helpers — they do <strong>not</strong> replace the Evidence Pack or lead review.</p>
           <ul class="checklist">
-            <li><label><input type="checkbox" data-progress="cert-1" data-module="certification" /><span>I completed Modules 1–4 checklists.</span></label></li>
-            <li><label><input type="checkbox" data-progress="cert-2" data-module="certification" /><span>I can write a complete bug report from the mandatory template.</span></label></li>
-            <li><label><input type="checkbox" data-progress="cert-3" data-module="certification" /><span>I can run <code>/diagnosing-bugs</code> then <code>/tdd</code> on a fix.</span></label></li>
-            <li><label><input type="checkbox" data-progress="cert-4" data-module="certification" /><span>I will document Root Cause + Prevention on every closed bug.</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-1" data-module="certification" /><span>I completed Setup + Modules 1–5 checklists (Five-Module Course).</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-2" data-module="certification" /><span>My Evidence Pack includes a rewritten report <em>or</em> Exercise A (full template).</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-3" data-module="certification" /><span>My Evidence Pack includes Phase 1 command + red output (Exercise Lab or real bug).</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-4" data-module="certification" /><span>My Evidence Pack includes Root Cause + Prevention and a lead has reviewed/approved the pack.</span></label></li>
           </ul>
         </div>
+
+        <div class="section-card">
+          <h3>After certification</h3>
+          <ul>
+            <li>Complete <strong>1–2 real bugs</strong> with the full process (Exercise F / homework).</li>
+            <li>Paste Phase 1 command and Prevention note on each ticket.</li>
+            <li>Bring both to the monthly bug-process retro.</li>
+          </ul>
+          <p>Living SOP: <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer">BUG-HANDLING-SOP.md</a> · Workshop: <a href="reference/WORKSHOP-AGENDA.md">WORKSHOP-AGENDA.md</a></p>
+        </div>
+
         <div class="page-nav no-print" id="pageNav"></div>
       </main>
     </div>

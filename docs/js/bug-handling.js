@@ -3,11 +3,14 @@
   const THEME_KEY = "bug-handling-sop-theme";
 
   const MODULES = [
-    { id: "module-1", href: "module-1.html", num: "1", label: "Why process matters", meta: "15m" },
-    { id: "module-2", href: "module-2.html", num: "2", label: "Reporting & triage", meta: "20m" },
-    { id: "module-3", href: "module-3.html", num: "3", label: "Diagnosis & fixing", meta: "35m" },
-    { id: "module-4", href: "module-4.html", num: "4", label: "Review & prevention", meta: "25m" },
+    { id: "module-1", href: "module-1.html", num: "1", label: "Report", meta: "25m" },
+    { id: "module-2", href: "module-2.html", num: "2", label: "Triage", meta: "30m" },
+    { id: "module-3", href: "module-3.html", num: "3", label: "Diagnosis", meta: "45m" },
+    { id: "module-4", href: "module-4.html", num: "4", label: "Fix", meta: "35m" },
+    { id: "module-5", href: "module-5.html", num: "5", label: "Review", meta: "30m" },
   ];
+
+  const SETUP = { id: "setup", href: "setup.html", num: "⚙", label: "Setup", meta: "15m" };
 
   const REFERENCE = [
     { id: "next-steps", href: "next-steps.html", num: "→", label: "Next steps" },
@@ -15,19 +18,22 @@
   ];
 
   const PROGRESS_IDS = [
+    "setup-c1", "setup-c2",
     "m1-c1", "m1-c2", "m1-c3",
     "m2-c1", "m2-c2", "m2-c3",
     "m3-c1", "m3-c2", "m3-c3", "m3-c4",
     "m4-c1", "m4-c2", "m4-c3",
+    "m5-c1", "m5-c2", "m5-c3",
     "cert-1", "cert-2", "cert-3", "cert-4",
   ];
 
   const PAGE_ORDER = [
     "index.html",
-    "quick-reference.html",
+    SETUP.href,
     ...MODULES.map((m) => m.href),
     "next-steps.html",
     "certification.html",
+    "quick-reference.html",
   ];
 
   const BUG_TEMPLATE = `**Title:** [Clear, concise description]
@@ -99,10 +105,12 @@
   function updateNavComplete() {
     const state = load();
     const byModule = {
+      setup: ["setup-c1", "setup-c2"],
       "module-1": ["m1-c1", "m1-c2", "m1-c3"],
       "module-2": ["m2-c1", "m2-c2", "m2-c3"],
       "module-3": ["m3-c1", "m3-c2", "m3-c3", "m3-c4"],
       "module-4": ["m4-c1", "m4-c2", "m4-c3"],
+      "module-5": ["m5-c1", "m5-c2", "m5-c3"],
       certification: ["cert-1", "cert-2", "cert-3", "cert-4"],
     };
     document.querySelectorAll(".nav-link[data-module]").forEach((link) => {
@@ -148,6 +156,7 @@
         <p class="nav-section-label">Start</p>
         <a class="nav-link${pageId === "hub" ? " is-active" : ""}" data-module="hub" href="${href("index.html")}"><span class="nav-num">⌂</span> Course hub</a>
         <a class="nav-link${pageId === "quick-reference" ? " is-active" : ""}" data-module="quick-reference" href="${href("quick-reference.html")}"><span class="nav-num">⚡</span> Quick reference</a>
+        <a class="nav-link${pageId === SETUP.id ? " is-active" : ""}" data-module="${SETUP.id}" href="${href(SETUP.href)}"><span class="nav-num">${SETUP.num}</span> ${SETUP.label} <span class="nav-meta">${SETUP.meta}</span></a>
         <p class="nav-section-label">Modules</p>
         ${moduleLinks}
         <p class="nav-section-label">Reference</p>

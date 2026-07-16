@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Module 1 — Why process matters | Bug Handling SOP</title>
+  <title>Module 1 — Report | Bug Handling SOP</title>
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,7 @@
     <div class="main">
       <header class="topbar no-print">
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div class="topbar-title">Module 1</div>
+        <div class="topbar-title">Module 1 — Report</div>
         <div class="topbar-actions">
           <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
         </div>
@@ -27,68 +27,182 @@
           <div class="module-header">
             <div class="module-badge">1</div>
             <div>
-              <h2>Why good bug processes matter</h2>
-              <p class="module-time">~15 min</p>
+              <h2>Bug Reporting Standards</h2>
+              <p class="module-time">~25 min</p>
             </div>
+          </div>
+
+          <div class="section-card">
+            <p class="eyebrow">Learning objectives</p>
+            <h3>What you will leave able to do</h3>
+            <ul>
+              <li>File a complete bug using the mandatory template without prompting.</li>
+              <li>Distinguish a weak report from an actionable one.</li>
+              <li>Use <code>/grill-me</code> or <code>/grill-with-docs</code> when the reporter’s story is incomplete.</li>
+            </ul>
           </div>
 
           <div class="hard-truth">
             <h3>Hard truth</h3>
-            <p>A vague “it broke” ticket is not a bug report — it is a time sink. Without reproduction, severity, and a closed loop to prevention, the same class of bug returns.</p>
+            <p>Incomplete tickets get returned. Reporting is not optional polish — it is the first feedback loop. A vague “it broke” ticket is a time sink; do not guess missing fields.</p>
           </div>
 
           <div class="section-card">
-            <h3>Goals of this process</h3>
+            <p class="eyebrow">Living SOP §4</p>
+            <h3>Mandatory bug report template</h3>
+            <p>All bug reports <strong>must</strong> use this template. Incomplete tickets are returned or moved to <code>needs-info</code>. Copy it:</p>
+            <div class="copy-row no-print" style="margin-bottom:0.75rem">
+              <button type="button" class="btn btn-primary btn-sm" data-copy-template>Copy bug template</button>
+              <span class="copy-feedback" aria-live="polite"></span>
+            </div>
+            <pre id="bugTemplatePreview" class="code-block"><code>**Title:** [Clear, concise description]
+
+**Environment**
+- Browser / OS / Version:
+- Backend / API version:
+- User role / permissions:
+- Other relevant context (device, network, etc.):
+
+**Reproduction Steps**
+1.
+2.
+3.
+
+**Expected Behavior**
+[What should happen]
+
+**Actual Behavior**
+[What actually happens]
+
+**Logs / Screenshots / Video**
+[Attach or link here]
+
+**Business / User Impact**
+[Who is affected and how severely; note any workaround]
+
+**Suggested Severity** (optional)
+[severity/s1 … severity/s4 — triage confirms]
+
+**Suggested Priority** (optional)
+[priority/p0 … priority/p3 — triage confirms]</code></pre>
+            <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--ink-faint)">Teaching copy also lives at <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/.github/ISSUE_TEMPLATE/bug-report.md" target="_blank" rel="noopener noreferrer"><code>.github/ISSUE_TEMPLATE/bug-report.md</code></a>.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Tips for great reports</h3>
             <ul>
-              <li>Reduce time-to-resolution</li>
-              <li>Improve reproducibility and root cause analysis</li>
-              <li>Enforce testing and prevent regressions</li>
-              <li>Build team muscle memory with Cursor skills</li>
-              <li>Create measurable improvement in bug quality and velocity</li>
+              <li>Make reproduction steps as <strong>short and reliable</strong> as possible.</li>
+              <li>Include <strong>before / after</strong> states when relevant.</li>
+              <li>Prefer a screen recording with timestamps over a novel-length narrative.</li>
+              <li>Capture one failing API payload or console error when available.</li>
+              <li>Note workarounds (or “no workaround”) — they affect Severity in Module 2.</li>
+              <li>Title format that helps triage: <code>[Area] verb + failure</code> — e.g. <code>[Checkout] Submit disabled after coupon apply</code>.</li>
             </ul>
           </div>
 
           <div class="section-card">
-            <h3>Core principles</h3>
-            <ul>
-              <li><strong>Reproducibility first:</strong> if we cannot reliably reproduce it, we do not start fixing it.</li>
-              <li><strong>Skills-driven:</strong> major steps use Matt Pocock skills (<code>mattpocock/skills</code>).</li>
-              <li><strong>Documentation discipline:</strong> every ticket ends with root cause + prevention notes.</li>
-              <li><strong>No shortcuts:</strong> TDD and code review are mandatory for production bugs.</li>
-              <li><strong>Continuous improvement:</strong> review this SOP quarterly.</li>
-            </ul>
-          </div>
+            <p class="eyebrow">Compare</p>
+            <h3>Weak vs strong</h3>
+            <div class="failure-modes">
+              <h3>Weak (do not accept)</h3>
+              <blockquote><p>“Dashboard is broken on mobile sometimes. Customers are complaining.”</p></blockquote>
+              <p>Missing environment, STR, expected vs actual, evidence, and impact. Return it — do not invent details.</p>
+            </div>
+            <p style="margin-top:1.25rem"><strong>Strong (accept)</strong></p>
+            <pre class="code-block"><code>**Title:** [Dashboard] KPI cards blank on iOS Safari after refresh
 
-          <div class="failure-modes">
-            <h3>Common failure modes</h3>
-            <ul>
-              <li><strong>Hero fixing:</strong> jump to a patch without a minimal reproduction.</li>
-              <li><strong>Template skip:</strong> missing environment or impact — triage stalls.</li>
-              <li><strong>Fix without test:</strong> same bug returns next sprint.</li>
-              <li><strong>Close without prevention:</strong> no learning for the next person.</li>
-            </ul>
+**Environment**
+- Browser / OS / Version: iOS 18.2, Safari; also reproducible in iPhone 15 Simulator
+- Backend / API version: api v2.14.1 (staging + prod)
+- User role / permissions: Org Admin
+- Other: Wi-Fi only; does not reproduce on desktop Chrome 126
+
+**Reproduction Steps**
+1. Sign in as Org Admin on iPhone Safari.
+2. Open Dashboard → Overview.
+3. Pull to refresh (or hard-reload).
+4. Observe KPI card row.
+
+**Expected Behavior**
+KPI cards show revenue, active users, and open tickets with numbers.
+
+**Actual Behavior**
+Cards render with labels but values stay “—” indefinitely. Network tab shows
+`/api/metrics/summary` returning 200 with body `{ "error": "timezone_offset_invalid" }`
+after refresh (first load is fine).
+
+**Logs / Screenshots / Video**
+- HAR attached; console screenshot of fetch error
+- Loom: https://example.invalid/loom/kpi-blank
+
+**Business / User Impact**
+Org Admins cannot trust daily metrics on mobile (~30% of admin sessions).
+Support tickets rising; not a full outage. Workaround: use desktop Chrome.
+
+**Suggested Severity:** severity/s3
+**Suggested Priority:** priority/p2</code></pre>
           </div>
 
           <div class="section-card">
-            <h3>Do this now</h3>
-            <p>Write one sentence: <em>“The last bug that hurt us most was ___ because we lacked ___.”</em> You will reuse this in Module 4.</p>
+            <h3>When intake is incomplete — grill</h3>
+            <p>Do not start diagnosis or fix work on a half-empty template. Clarify first:</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Situation</th><th>Skill</th><th>Why</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Reporter is a human with incomplete STR</td>
+                    <td><code>/grill-me</code></td>
+                    <td>Relentless Q&amp;A until branches resolve</td>
+                  </tr>
+                  <tr>
+                    <td>Ambiguity involves domain terms / product language</td>
+                    <td><code>/grill-with-docs</code></td>
+                    <td>Same grilling + updates <code>CONTEXT.md</code> / ADRs via domain modeling</td>
+                  </tr>
+                  <tr>
+                    <td>Triage already running</td>
+                    <td><code>/triage</code> (verify + grill if needed)</td>
+                    <td>Built-in path to grilling + routing (Module 2)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin-top:0.75rem"><strong>Workshop prompt:</strong> Facilitator plays a vague reporter. Engineer may only ask questions via a grill session — no codebase diving until the template is complete.</p>
+          </div>
+
+          <div class="section-card">
+            <p class="eyebrow">Paper Exercise A</p>
+            <h3>Rewrite the weak report</h3>
+            <p>Individually (~8 minutes): rewrite this into the mandatory template (note, draft issue, or paste below). Invent plausible but consistent details — mark anything you had to invent so a real triage would know to verify.</p>
+            <blockquote><p>“Dashboard is broken on mobile sometimes. Customers are complaining.”</p></blockquote>
+            <ol>
+              <li>Fill every required section (title through business/user impact).</li>
+              <li>Optionally suggest <code>severity/s*</code> and <code>priority/p*</code> — triage will confirm.</li>
+              <li>Peer review: mark any missing section; return incomplete tickets instead of guessing.</li>
+            </ol>
+            <p><strong>Optional pair drill:</strong> one person is reporter with a secret “real” bug; the other completes the template using <code>/grill-me</code>-style questions (even offline as a checklist).</p>
+            <button type="button" class="btn btn-ghost btn-sm" data-reveal="ex-a-answer" aria-expanded="false">Show sample rewrite</button>
+            <div class="reveal-answer" id="ex-a-answer">
+              <p>A strong rewrite looks like the “Strong (accept)” example above: named area in the title, environment that narrows platform, numbered STR that hits the failure, expected vs actual with a concrete API error, evidence links, and impact with workaround noted. Your invented details will differ — the bar is completeness and falsifiability, not matching that story exactly.</p>
+            </div>
           </div>
 
           <div class="section-card">
             <h3>Checklist</h3>
             <ul class="checklist">
-              <li><label><input type="checkbox" data-progress="m1-c1" data-module="module-1" /><span>I can name the five goals of this process.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m1-c2" data-module="module-1" /><span>I can explain “reproducibility first.”</span></label></li>
-              <li><label><input type="checkbox" data-progress="m1-c3" data-module="module-1" /><span>I wrote my one-sentence “last painful bug” statement.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m1-c1" data-module="module-1" /><span>I can list every required template section from memory.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m1-c2" data-module="module-1" /><span>I rewrote the weak report into a strong one (Paper Exercise A).</span></label></li>
+              <li><label><input type="checkbox" data-progress="m1-c3" data-module="module-1" /><span>I know when to use <code>/grill-me</code> vs <code>/grill-with-docs</code>, and I will return incomplete tickets instead of guessing.</span></label></li>
             </ul>
           </div>
 
           <div class="section-card self-check">
             <h3>Self-check</h3>
             <div class="self-check-item">
-              <p>Why is fixing without reproduction a failure mode?</p>
+              <p>A reporter says “checkout is broken.” Should you open <code>/diagnosing-bugs</code> immediately?</p>
               <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc1-1">Show answer</button>
-              <div class="reveal-answer" id="sc1-1">You cannot verify the fix or write a regression test. You risk shipping a guess that does not address the real cause.</div>
+              <div class="reveal-answer" id="sc1-1">No. Complete the mandatory template first. Use <code>/grill-me</code> or <code>/grill-with-docs</code> until environment, STR, expected/actual, evidence, and impact are filled — then triage can verify the claim. Diagnosis starts only when Triage State is <code>ready-for-agent</code> or <code>ready-for-human</code>.</div>
             </div>
           </div>
         </section>

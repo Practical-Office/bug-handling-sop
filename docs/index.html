@@ -22,51 +22,62 @@
         <div class="topbar-actions">
           <button type="button" class="btn btn-ghost btn-sm" id="topbarTheme" aria-label="Toggle theme">Theme</button>
           <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
-          <a class="btn btn-primary btn-sm" href="module-1.html">Start module 1 →</a>
+          <a class="btn btn-primary btn-sm" href="setup.html">Start with Setup →</a>
         </div>
       </header>
       <main class="content" id="top">
         <section class="hero">
           <span class="status-chip">Practical AI team onboarding</span>
           <h1>Bug Handling <em>SOP</em></h1>
-          <p class="hero-lede">Learn Practical AI’s shared bug process: reproducible reports, severity triage, Cursor skill-driven diagnosis, TDD fixes, and root-cause closure. (~90–120 min)</p>
+          <p class="hero-lede">Shared language for reporting, triage, diagnosis, TDD fixes, and root-cause closure — powered by Matt Cursor skills. Five-Module Course ≈ 2.5–3.5 hours (workshop ≈ 3h).</p>
         </section>
 
+        <div class="section-card" id="why">
+          <p class="eyebrow">Why</p>
+          <h3>Why a shared bug process matters</h3>
+          <p>Without a common loop, every engineer invents intake, triage, and “fix” habits. That burns time on incomplete tickets, mixed-up severity language, and untested patches. This course teaches one end-to-end path so the team ships fewer regressions and closes bugs with Root Cause + Prevention — not just a green PR.</p>
+          <p style="margin-top:0.75rem"><strong>Principles:</strong> Reproducibility First (fulfilled by Diagnosis Loop Phases 1–2) · Skills-driven · Root Cause + Prevention · <code>/tdd</code> + <code>/code-review</code> mandatory · Improve quarterly.</p>
+          <p style="margin-top:0.75rem"><strong>Skills chain:</strong> <code>/diagnosing-bugs</code> → <code>/tdd</code> → <code>/code-review</code> (plus <code>/triage</code> and grill skills at intake).</p>
+        </div>
+
         <div class="card-grid">
-          <div class="stat-card"><strong>4 modules</strong><span>~90–120 minutes guided</span></div>
-          <div class="stat-card"><strong>Living SOP</strong><span>Edited as process grows</span></div>
-          <div class="stat-card"><strong>Bug template</strong><span>Mandatory report fields</span></div>
-          <div class="stat-card"><strong>Skills-driven</strong><span>diagnose → tdd → review</span></div>
+          <div class="stat-card"><strong>5 modules</strong><span>~2.5–3.5h guided · workshop ≈ 3h</span></div>
+          <div class="stat-card"><strong>Setup first</strong><span>Skills install pre-req</span></div>
+          <div class="stat-card"><strong>Living SOP</strong><span>Process source of truth</span></div>
+          <div class="stat-card"><strong>Evidence Pack</strong><span>Cert with linked proof</span></div>
         </div>
 
         <div class="section-card">
           <p class="eyebrow">Source of truth</p>
-          <p>The living process document is <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer"><strong>BUG-HANDLING-SOP.md</strong></a> in this repo. Course modules teach it; when process changes, update the SOP first, then align the modules.</p>
+          <p>The living process document is <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer"><strong>BUG-HANDLING-SOP.md</strong></a>. Course modules teach it; when process changes, update the SOP first, then align the modules.</p>
+          <p style="margin-top:0.75rem">Facilitators: see the <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/WORKSHOP-AGENDA.md" target="_blank" rel="noopener noreferrer"><strong>Workshop Agenda</strong></a> (~3h room plan).</p>
         </div>
 
         <div class="section-card" id="toc">
           <p class="eyebrow">Table of contents</p>
           <div class="table-wrap" style="margin:0;border:none;box-shadow:none">
             <table>
-              <thead><tr><th>#</th><th>Module</th><th>Time</th></tr></thead>
+              <thead><tr><th>#</th><th>Page</th><th>Time</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td><a href="module-1.html">Why good bug processes matter</a></td><td>~15 min</td></tr>
-                <tr><td>2</td><td><a href="module-2.html">Reporting &amp; triage</a></td><td>~20 min</td></tr>
-                <tr><td>3</td><td><a href="module-3.html">Diagnosis &amp; fixing with skills</a></td><td>~30–40 min</td></tr>
-                <tr><td>4</td><td><a href="module-4.html">Review, closure &amp; prevention</a></td><td>~20–25 min</td></tr>
+                <tr><td>—</td><td><a href="setup.html"><strong>Setup</strong> — skills install (complete first)</a></td><td>~15 min</td></tr>
+                <tr><td>1</td><td><a href="module-1.html">Report</a></td><td>~25 min</td></tr>
+                <tr><td>2</td><td><a href="module-2.html">Triage</a></td><td>~30 min</td></tr>
+                <tr><td>3</td><td><a href="module-3.html">Diagnosis</a></td><td>~45 min</td></tr>
+                <tr><td>4</td><td><a href="module-4.html">Fix</a></td><td>~35 min</td></tr>
+                <tr><td>5</td><td><a href="module-5.html">Review / Prevention</a></td><td>~30 min</td></tr>
                 <tr><td>—</td><td><a href="quick-reference.html">Quick reference</a></td><td>print</td></tr>
-                <tr><td>—</td><td><a href="certification.html">Certification</a></td><td>submit</td></tr>
+                <tr><td>—</td><td><a href="next-steps.html">Next steps</a> · <a href="certification.html">Certification</a></td><td>homework</td></tr>
               </tbody>
             </table>
           </div>
           <p style="margin:1rem 0 0;font-size:0.9rem;color:var(--ink-faint)">
-            Core skills: <code>/diagnosing-bugs</code> → <code>/tdd</code> → <code>/code-review</code>
+            Hub “Why” (above) is intro only — not a numbered module. Start at <a href="setup.html">Setup</a>, then Module 1.
           </p>
         </div>
 
         <div class="print-actions no-print">
           <p class="eyebrow">Save as PDF</p>
-          <p>Open the <a href="course-full.html">full course page</a>, then <strong>Print → Save as PDF</strong>.</p>
+          <p>Open the <a href="course-full.html">full course page</a> (Setup + Modules 1–5 + key reference), then <strong>Print → Save as PDF</strong>.</p>
           <button type="button" class="btn btn-primary" id="printCourse" onclick="location.href='course-full.html'">Open printable course →</button>
         </div>
 

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setup — Skills install | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="setup" data-base="" data-file="setup.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Setup</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="hero">
+          <span class="status-chip">Pre-requisite · ~15 min</span>
+          <h1>Skills <em>setup</em></h1>
+          <p class="hero-lede">Install and configure Matt Pocock Cursor skills before Module 1. This is a one-time Setup Pre-req — not a numbered content module.</p>
+        </section>
+
+        <div class="section-card">
+          <p class="eyebrow">Learning objectives</p>
+          <h3>What you will leave able to do</h3>
+          <ul>
+            <li>Install the Matt Pocock skills pack into Cursor (and optionally other agents).</li>
+            <li>Run <code>/setup-matt-pocock-skills</code> once per repo and know what files it creates.</li>
+            <li>Know which skills are user-invoked vs model-invoked for bug work.</li>
+          </ul>
+        </div>
+
+        <div class="hard-truth">
+          <h3>Hard truth</h3>
+          <p>Modules 1–5 assume these skills are available. Skipping Setup means you will invent process instead of using the shared loop — and your Evidence Pack will not match how the team actually works.</p>
+        </div>
+
+        <div class="section-card">
+          <p class="eyebrow">Step 1</p>
+          <h3>Install Matt Pocock skills</h3>
+          <p>Preferred path (skills.sh — editable copies in the project):</p>
+          <pre class="code-block"><code>npx skills@latest add mattpocock/skills</code></pre>
+          <p>During install:</p>
+          <ol>
+            <li>Select the skills you need (at minimum the bug-handling set below).</li>
+            <li>Select <strong>Cursor</strong> as a target agent.</li>
+            <li><strong>Ensure you select <code>/setup-matt-pocock-skills</code>.</strong></li>
+          </ol>
+          <p><strong>Minimum bug-handling set:</strong> <code>diagnosing-bugs</code>, <code>tdd</code>, <code>triage</code>, <code>code-review</code>, <code>grill-me</code> / <code>grill-with-docs</code>, and <code>setup-matt-pocock-skills</code>.</p>
+          <p style="margin-top:1rem;font-size:0.9rem;color:var(--ink-faint)">Optional Claude Code plugin path: <code>claude plugin marketplace add mattpocock/skills</code> then <code>claude plugin install mattpocock-skills@mattpocock</code> — still run <code>/setup-matt-pocock-skills</code> once per repo afterward.</p>
+        </div>
+
+        <div class="section-card">
+          <p class="eyebrow">Step 2</p>
+          <h3>Run <code>/setup-matt-pocock-skills</code></h3>
+          <p>This skill is <strong>prompt-driven</strong>, not a silent script. It will:</p>
+          <ol>
+            <li>Explore the repo (<code>git remote</code>, <code>AGENTS.md</code> / <code>CLAUDE.md</code>, existing <code>docs/agents/</code>, triage skill presence).</li>
+            <li>Ask (with recommended defaults):
+              <ul>
+                <li><strong>Issue tracker</strong> — GitHub / GitLab / local markdown / other</li>
+                <li><strong>Triage label vocabulary</strong> — defaults: <code>needs-triage</code>, <code>needs-info</code>, <code>ready-for-agent</code>, <code>ready-for-human</code>, <code>wontfix</code></li>
+                <li><strong>Domain docs layout</strong> — usually single-context <code>CONTEXT.md</code> + <code>docs/adr/</code></li>
+              </ul>
+            </li>
+            <li>Write / update:
+              <ul>
+                <li><code>docs/agents/issue-tracker.md</code></li>
+                <li><code>docs/agents/triage-labels.md</code> (if triage installed)</li>
+                <li><code>docs/agents/domain.md</code></li>
+                <li>An <code>## Agent skills</code> block in <code>AGENTS.md</code> or <code>CLAUDE.md</code></li>
+              </ul>
+            </li>
+          </ol>
+          <p><strong>Team default for Practical AI repos:</strong> GitHub Issues via <code>gh</code>, with triage state labels aligned to Matt’s roles. Severity (<code>severity/s1</code>–<code>severity/s4</code>) and Priority (<code>priority/p0</code>–<code>priority/p3</code>) sit alongside those states — see <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/agents/triage-labels.md" target="_blank" rel="noopener noreferrer">triage-labels.md</a> and Module 2.</p>
+          <p>On this training repo, confirm <code>docs/agents/issue-tracker.md</code> and <code>docs/agents/triage-labels.md</code> already match the Living SOP — re-run setup only if something is missing or wrong.</p>
+        </div>
+
+        <div class="section-card">
+          <p class="eyebrow">Reference</p>
+          <h3>Skills cheat sheet for this course</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Skill</th><th>Invoke</th><th>Role in bug handling</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>/setup-matt-pocock-skills</code></td><td>User</td><td>One-time repo configuration</td></tr>
+                <tr><td><code>/grill-me</code></td><td>User</td><td>Clarify vague plans / reports</td></tr>
+                <tr><td><code>/grill-with-docs</code></td><td>User</td><td>Grill + sharpen domain model / ADRs / <code>CONTEXT.md</code></td></tr>
+                <tr><td><code>/triage</code></td><td>User</td><td>Category, state, verify, brief, route</td></tr>
+                <tr><td><code>/diagnosing-bugs</code></td><td>Model or user</td><td>Diagnosis Loop (six phases)</td></tr>
+                <tr><td><code>/tdd</code></td><td>Model or user</td><td>Red → green vertical slices at agreed seams</td></tr>
+                <tr><td><code>/code-review</code></td><td>Model or user</td><td>Parallel Standards ‖ Spec review</td></tr>
+                <tr><td><code>/ask-matt</code></td><td>User</td><td>Router — “which skill should I use?”</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--ink-faint)">Also useful later: <code>/implement</code> (build from tickets), <code>/grilling</code> (model interview loop), <code>/domain-modeling</code>, <code>/improve-codebase-architecture</code> after a fix exposes a bad seam.</p>
+        </div>
+
+        <div class="section-card">
+          <p class="eyebrow">Exercise</p>
+          <h3>Confirm the install</h3>
+          <ol>
+            <li>In this training clone (or a throwaway clone), run the installer if skills are not already present.</li>
+            <li>Run <code>/setup-matt-pocock-skills</code> and accept GitHub defaults when prompted — or verify existing agent docs match the Living SOP.</li>
+            <li>Confirm <code>docs/agents/issue-tracker.md</code> exists and points at <code>Practical-Office/bug-handling-sop</code> for course work.</li>
+            <li>Type <code>/ask-matt</code> and ask: “I have a flaky production bug with no clear STR — which skill?”</li>
+          </ol>
+        </div>
+
+        <div class="section-card">
+          <h3>Checklist</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox" data-progress="setup-c1" data-module="setup" /><span>I installed Matt skills for Cursor (<code>npx skills@latest add mattpocock/skills</code>) including the bug-handling set and <code>setup-matt-pocock-skills</code>.</span></label></li>
+            <li><label><input type="checkbox" data-progress="setup-c2" data-module="setup" /><span>I ran (or verified) <code>/setup-matt-pocock-skills</code> and can invoke <code>/diagnosing-bugs</code>, <code>/tdd</code>, <code>/code-review</code>, <code>/triage</code>, and grill skills.</span></label></li>
+          </ul>
+        </div>
+
+        <div class="section-card self-check">
+          <h3>Self-check</h3>
+          <div class="self-check-item">
+            <p>What does <code>/setup-matt-pocock-skills</code> write that triage depends on?</p>
+            <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc-setup-1">Show answer</button>
+            <div class="reveal-answer" id="sc-setup-1">Issue-tracker and triage-label docs under <code>docs/agents/</code> (plus an Agent skills block in <code>AGENTS.md</code> / <code>CLAUDE.md</code>). Severity and Priority labels from the Living SOP sit alongside Matt’s triage states — Module 2 teaches both.</div>
+          </div>
+        </div>
+
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

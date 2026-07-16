@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Module 4 — Review, closure &amp; prevention | Bug Handling SOP</title>
+  <title>Module 4 — Fix | Bug Handling SOP</title>
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,7 @@
     <div class="main">
       <header class="topbar no-print">
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div class="topbar-title">Module 4</div>
+        <div class="topbar-title">Module 4 — Fix</div>
         <div class="topbar-actions">
           <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
         </div>
@@ -27,68 +27,183 @@
           <div class="module-header">
             <div class="module-badge">4</div>
             <div>
-              <h2>Review, closure &amp; prevention</h2>
-              <p class="module-time">~20–25 min</p>
+              <h2>Fixing with <code>/tdd</code></h2>
+              <p class="module-time">~35 min</p>
             </div>
           </div>
 
           <div class="section-card">
-            <h3>Code review &amp; closure</h3>
+            <h3>Learning objectives</h3>
+            <ul>
+              <li>Fix bugs with <code>/tdd</code> at <strong>pre-agreed seams</strong> — red → green in vertical slices.</li>
+              <li>Turn a minimised repro into a failing regression test that asserts the user’s symptom.</li>
+              <li>Keep the fix minimal and hypothesis-aligned; re-run the original Phase 1 loop after green.</li>
+              <li>Continue the <a href="https://github.com/Practical-Office/bug-handling-sop/tree/main/exercises/invoice-api">Exercise Lab</a> from Module 3 — not a product backlog ticket.</li>
+            </ul>
+          </div>
+
+          <div class="hard-truth">
+            <h3>Hard truth</h3>
+            <p>TDD without a failing test first is theater. Tests coupled to internals are liabilities. Speculative “while we’re here” refactors in a bug PR are how small fixes become large regressions.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Prerequisites from Module 3</h3>
+            <p>Do not start this module’s lab path until you have:</p>
+            <ul>
+              <li>A red Phase 1 signal from <code>npm run phase1</code> in <a href="https://github.com/Practical-Office/bug-handling-sop/tree/main/exercises/invoice-api"><code>exercises/invoice-api</code></a>.</li>
+              <li>A minimisation story and a ranked, falsifiable hypothesis (or short list).</li>
+              <li>A proposed <strong>correct seam</strong> for the regression test.</li>
+            </ul>
+            <p>On a real ticket: Triage State must be <code>ready-for-agent</code> or <code>ready-for-human</code> before fix work starts. Diagnosis uses <code>/diagnosing-bugs</code>; the fix itself uses <code>/tdd</code>.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>What a good regression test is</h3>
+            <ul>
+              <li>Verifies <strong>behavior through a public interface</strong> — not private helpers or implementation details.</li>
+              <li>Reads like a specification of the user’s symptom (“with Accept-Timezone, invoices for asOf date are returned”).</li>
+              <li>Survives refactors: it fails when the bug returns, not when you rename an internal.</li>
+              <li>Expected values come from an independent source of truth (known-good fixture / literal), not by recomputing the same way as the code.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Seams — where the test goes</h3>
+            <p>A <strong>seam</strong> is the public boundary you observe without reaching inside. Tests live at seams.</p>
+            <ul>
+              <li><strong>Before writing any test</strong>, write down the seams under test and confirm with a human (partner / lead).</li>
+              <li>No test at an unconfirmed seam.</li>
+              <li>A <strong>correct seam</strong> exercises the <em>real bug pattern</em> at the call site. A shallow unit test that cannot reproduce the chain gives false confidence.</li>
+              <li>If no correct seam exists, document that finding — architecture may need a follow-up after the fix ships.</li>
+            </ul>
+            <p>For the Invoice API lab, agree which boundary you will lock: HTTP route behavior (Phase 1 script / integration) and/or the list-logic function that mishandles timezone — as long as the assertion matches the reporter’s empty-list symptom.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Anti-patterns</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Anti-pattern</th><th>Tell</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Implementation-coupled</strong></td>
+                    <td>Breaks on refactor with unchanged behavior; mocks internals; tests private methods.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tautological</strong></td>
+                    <td>Assertion recomputes the expected value the same way the code does — can never disagree with the bug.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Horizontal slicing</strong></td>
+                    <td>All tests first, then all implementation — you test imagined behavior, not tracer-bullet learning.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Rules of the loop (red → green → refactor)</h3>
             <ol>
-              <li>Open a PR with a clear description referencing the ticket.</li>
-              <li>Run <code>/code-review</code>.</li>
-              <li>Address all feedback.</li>
-              <li>Update the original ticket with:
+              <li><strong>Red before green</strong> — write the failing test first; then only enough code to pass it.</li>
+              <li><strong>One slice at a time</strong> — one seam, one test, one minimal implementation per cycle.</li>
+              <li><strong>Refactoring is not part of the red→green loop</strong> — belongs with the <code>/code-review</code> stage (Module 5), not bundled into “make it green.”</li>
+            </ol>
+            <p>Vertical slice mental model for bugs:</p>
+            <pre class="code-block"><code>Slice 1: failing test for exact symptom at seam A → minimal fix
+Slice 2: adjacent edge case diagnosis revealed → minimal fix
+Stop when original Phase 1 loop is green and a Prevention note is draftable</code></pre>
+            <p>Do <strong>not</strong> “while we’re here” rewrite the module. Park deepening in a follow-up ticket.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Recommended fix workflow</h3>
+            <ol>
+              <li>Acknowledge the ticket; set work in progress (real bugs: after a <code>ready-for-*</code> Triage State).</li>
+              <li>Finish <code>/diagnosing-bugs</code> through a clear root hypothesis (Module 3).</li>
+              <li>Agree seams for regression coverage with a human.</li>
+              <li>Run <code>/tdd</code>:
                 <ul>
-                  <li><strong>Root Cause:</strong> detailed explanation</li>
-                  <li><strong>Prevention:</strong> what we will do to stop this class of bug</li>
+                  <li>Turn the <strong>minimised repro</strong> into a failing test at the agreed seam.</li>
+                  <li>Watch it fail for the <em>right</em> reason (the symptom — not a setup error).</li>
+                  <li>Apply the <strong>minimal</strong> fix aligned with the winning hypothesis.</li>
+                  <li>Watch green; then re-run the <strong>original</strong> Phase 1 command (un-minimised).</li>
                 </ul>
               </li>
-              <li>QA verifies the fix.</li>
-              <li>Close ticket and PR.</li>
+              <li>Document findings on the ticket as you go (partial notes OK before PR). Keep the winning hypothesis visible in the PR description.</li>
             </ol>
+            <p>Closure, Root Cause + Prevention, and <code>/code-review</code> (Standards ‖ Spec) are Module 5 — do not skip them on real bugs; for the lab, draft a one-line Prevention note after green.</p>
           </div>
 
-          <div class="section-card">
-            <h3>Metrics to track</h3>
+          <div class="failure-modes">
+            <h3>Common failure modes</h3>
             <ul>
-              <li>Average time from report → fix (by severity)</li>
-              <li>% of bugs with reproduction steps</li>
-              <li>% of fixes with regression tests</li>
-              <li>Recurring bug rate</li>
-              <li>Team feedback on process</li>
+              <li><strong>Green without red:</strong> “fix” applied first; test written after to match the patch.</li>
+              <li><strong>Wrong red:</strong> test fails on missing fixture / wrong assertion, not the user symptom.</li>
+              <li><strong>Shotgun fix:</strong> remove the feature (e.g. drop <code>Accept-Timezone</code> globally) instead of honoring the contract.</li>
+              <li><strong>Skip original loop:</strong> minimised case green, but the Phase 1 command still red (or never re-run).</li>
             </ul>
           </div>
 
+          <!-- ========== Lab / Exercise D ========== -->
           <div class="section-card">
-            <h3>Updating the living SOP</h3>
-            <p>Suggested improvements or new skills should be proposed in a dedicated ticket on <code>Practical-Office/bug-handling-sop</code>. Approval: team lead + engineering manager. Edit <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer">BUG-HANDLING-SOP.md</a> once approved, then align course modules.</p>
+            <h3>Exercise Lab — continue Invoice API</h3>
+            <p>Same fixture as Module 3: <a href="https://github.com/Practical-Office/bug-handling-sop/tree/main/exercises/invoice-api"><code>exercises/invoice-api</code></a>. Training only — not BookIQ or product code.</p>
+            <pre class="code-block"><code>cd exercises/invoice-api
+npm install          # if not already
+npm run phase1       # must still be RED before your fix</code></pre>
+            <p>Keep <code>npm run phase1</code> failing until a minimal fix + regression at your agreed seam turns the world green. After the fix, that same command should exit <strong>0</strong> (no red signal).</p>
+            <p>Intentional bug lives in lab list logic (<code>src/invoices.ts</code>); the HTTP surface is <code>src/server.ts</code>. Prefer changing only what the winning hypothesis supports.</p>
           </div>
 
           <div class="section-card">
-            <h3>Post-training</h3>
-            <ul>
-              <li>Each engineer completes 1–2 bugs following the full process.</li>
-              <li>Monthly retro on bug process effectiveness.</li>
-            </ul>
-            <p>Reuse your Module 1 sentence: turn it into a <strong>Prevention</strong> note for a real or hypothetical ticket.</p>
+            <h3>Exercise D — Red → green (paired)</h3>
+            <p>Continue the Module 3 Invoice API diagnosis. With your partner:</p>
+            <ol>
+              <li><strong>Confirm the seam</strong> you named in Module 3 (write it down; partner must agree).</li>
+              <li><strong>Write a failing test sketch</strong> (real test in the lab, or pseudo-code if timeboxed) that asserts the user’s symptom: with <code>Accept-Timezone</code> set, invoices for the <code>asOf</code> date are <em>not</em> an empty list when data exists.</li>
+              <li>Run or walk the sketch — it must fail <strong>for the right reason</strong> while the bug is present.</li>
+              <li><strong>Outline the minimal fix</strong> in ≤5 lines of prose (hypothesis-aligned). Then implement only that.</li>
+              <li>Re-run <code>npm run phase1</code>. Expect green (exit 0).</li>
+              <li>Self-review the test against the anti-pattern table before calling the slice done.</li>
+            </ol>
+            <p><strong>Pass criteria:</strong> the test would fail before the fix; the fix matches the winning hypothesis; the original Phase 1 command is green; no speculative refactors bundled in.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Facilitator demo (optional)</h3>
+            <ol>
+              <li>Show Module 3’s red <code>npm run phase1</code>.</li>
+              <li>Add / sketch the failing regression at the agreed seam; watch red for the symptom.</li>
+              <li>Apply a minimal fix; watch the seam test green.</li>
+              <li>Re-run Phase 1; confirm the un-minimised loop is green.</li>
+              <li>Call out a bad fix (“remove Accept-Timezone support globally”) as a Spec fail for Module 5.</li>
+            </ol>
           </div>
 
           <div class="section-card">
             <h3>Checklist</h3>
             <ul class="checklist">
-              <li><label><input type="checkbox" data-progress="m4-c1" data-module="module-4" /><span>I know the required Root Cause + Prevention fields.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m4-c2" data-module="module-4" /><span>I can name at least three process metrics.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m4-c3" data-module="module-4" /><span>I wrote a Prevention note from my Module 1 sentence.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m4-c1" data-module="module-4" /><span>I confirmed seams with a human and saw the regression fail for the right reason (red before green).</span></label></li>
+              <li><label><input type="checkbox" data-progress="m4-c2" data-module="module-4" /><span>My fix is minimal and hypothesis-aligned — no speculative refactors in the bug slice.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m4-c3" data-module="module-4" /><span>I re-ran the original Phase 1 loop (<code>npm run phase1</code> on the lab) and it is green — or completed Exercise D to that bar.</span></label></li>
             </ul>
           </div>
 
           <div class="section-card self-check">
             <h3>Self-check</h3>
             <div class="self-check-item">
-              <p>What two fields must every closed bug include?</p>
+              <p>When do you write the regression test relative to the fix — and what must be true about the seam?</p>
               <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc4-1">Show answer</button>
-              <div class="reveal-answer" id="sc4-1">Root Cause and Prevention.</div>
+              <div class="reveal-answer" id="sc4-1">Write the failing regression test <strong>before</strong> the fix when a correct seam exists — one that exercises the real bug pattern at the call site. Confirm the seam with a human first. Watch red for the user’s symptom, then minimal fix, then green, then re-run the original Phase 1 command.</div>
+            </div>
+            <div class="self-check-item" style="margin-top:1rem">
+              <p>Your Phase 1 script is still red after the unit test is green. Are you done?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc4-2">Show answer</button>
+              <div class="reveal-answer" id="sc4-2">No. Re-run the original (un-minimised) Phase 1 loop. If it is still red, the seam test did not lock the real bug path — keep diagnosing or widen the seam until Phase 1 is green.</div>
             </div>
           </div>
         </section>

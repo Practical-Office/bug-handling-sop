@@ -10,4 +10,5 @@ alwaysApply: true
 - **Do not** edit BookIQ services, ledger, or live product bug issues from this workspace.
 - **Issue tracker:** `Practical-Office/bug-handling-sop` (see `docs/agents/issue-tracker.md`).
 - **Living SOP:** `docs/reference/BUG-HANDLING-SOP.md` is the process source of truth; keep modules aligned.
+- **Course structure:** Five-Module Course (Report, Triage, Diagnosis, Fix, Review/Prevention) plus Setup pre-req — not four modules.
 - **Wayfinder:** one ticket per session; claim before work; refer by linked title.

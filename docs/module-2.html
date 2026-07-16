@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Module 2 — Reporting &amp; triage | Bug Handling SOP</title>
+  <title>Module 2 — Triage | Bug Handling SOP</title>
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,7 @@
     <div class="main">
       <header class="topbar no-print">
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div class="topbar-title">Module 2</div>
+        <div class="topbar-title">Module 2 — Triage</div>
         <div class="topbar-actions">
           <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
         </div>
@@ -27,80 +27,219 @@
           <div class="module-header">
             <div class="module-badge">2</div>
             <div>
-              <h2>Reporting &amp; triage</h2>
-              <p class="module-time">~20 min</p>
+              <h2>Triage Process</h2>
+              <p class="module-time">~30 min</p>
             </div>
           </div>
 
           <div class="section-card">
-            <h3>Mandatory bug report template</h3>
-            <p>Tickets missing required sections are returned for completion. Copy the template:</p>
-            <div class="copy-row no-print" style="margin-bottom:0.75rem">
-              <button type="button" class="btn btn-primary btn-sm" data-copy-template>Copy bug template</button>
-              <span class="copy-feedback" aria-live="polite"></span>
-            </div>
-            <pre id="bugTemplatePreview" class="code-block"><code>**Title:** [Clear, concise description]
+            <p class="eyebrow">Learning objectives</p>
+            <h3>What you will leave able to do</h3>
+            <ul>
+              <li>Apply Severity (<code>severity/s1</code>–<code>severity/s4</code>) and Priority (<code>priority/p0</code>–<code>priority/p3</code>) with correct triage SLAs.</li>
+              <li>Route issues with Matt’s Triage Category + Triage State machine (<code>/triage</code>).</li>
+              <li>Verify claims (reproduce or <code>needs-info</code>) before declaring work ready — including stale and non-bug routing.</li>
+            </ul>
+          </div>
 
-**Environment**
-- Browser / OS / Version:
-- Backend / API version:
-- User role / permissions:
-- Other relevant context:
-
-**Reproduction Steps**
-1.
-2.
-3.
-
-**Expected Behavior**
-**Actual Behavior**
-**Logs / Screenshots / Video**
-**Business / User Impact**</code></pre>
-            <p><strong>Tips:</strong> keep reproduction steps short and reliable; include before/after states; use <code>/grill-with-docs</code> with the reporter if clarification is needed.</p>
+          <div class="hard-truth">
+            <h3>Hard truth</h3>
+            <p>Triage is <strong>confirmation + routing</strong>, not “add a label and hope.” Peer SOPs (Kubernetes, Chromium, GitLab, Mozilla) agree: reproduce or clarify first, then accept into a work queue. Work starts only at <code>ready-for-agent</code> or <code>ready-for-human</code>.</p>
           </div>
 
           <div class="section-card">
-            <h3>Severity levels</h3>
+            <p class="eyebrow">Living SOP §5</p>
+            <h3>Severity ≠ Priority</h3>
+            <p><strong>Severity</strong> = user/business impact (how bad). <strong>Priority</strong> = scheduling urgency (when we plan to work it), given Severity and capacity. Do <strong>not</strong> collapse these into a single mixed P1–P4 impact scale. Canonical label strings: <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/agents/triage-labels.md" target="_blank" rel="noopener noreferrer">triage-labels.md</a>.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Severity (<code>severity/s1</code> … <code>severity/s4</code>) — workaround-aware</h3>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Level</th><th>Meaning</th><th>Triage SLA</th></tr></thead>
+                <thead><tr><th>Label</th><th>Meaning</th><th>Workaround lens</th><th>Triage SLA</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>P1 Blocker</strong></td><td>Outage, security, or core flow blocked</td><td>Within <strong>1 hour</strong></td></tr>
-                  <tr><td><strong>P2 Major</strong></td><td>Significant break for many users</td><td>Within <strong>4 hours</strong></td></tr>
-                  <tr><td><strong>P3 Minor</strong></td><td>Limited users or non-critical paths</td><td>Normal backlog</td></tr>
-                  <tr><td><strong>P4 Cosmetic</strong></td><td>Visual/typo/low-impact UX</td><td>When capacity allows</td></tr>
+                  <tr>
+                    <td><code>severity/s1</code></td>
+                    <td>Critical: outage, data loss/corruption, active security risk, or core flow blocked for many users</td>
+                    <td><strong>No</strong> acceptable workaround (or workaround is unsafe)</td>
+                    <td>≤ <strong>1 hour</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>severity/s2</code></td>
+                    <td>Major: significant breakage for many users, or severe degradation of a primary workflow</td>
+                    <td>Workaround exists but is <strong>complex, costly, or partial</strong></td>
+                    <td>≤ <strong>4 hours</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>severity/s3</code></td>
+                    <td>Moderate: limited users, secondary paths, or non-critical features</td>
+                    <td><strong>Reasonable</strong> workaround available</td>
+                    <td>Normal cadence (daily skim; full triage within the working week)</td>
+                  </tr>
+                  <tr>
+                    <td><code>severity/s4</code></td>
+                    <td>Low: cosmetic, typos, polish, minor UX friction</td>
+                    <td>Trivial workaround or negligible impact</td>
+                    <td>Normal cadence</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
+            <p style="margin-top:0.75rem"><strong>Calibration:</strong> when unsure between two severities, <strong>overestimate briefly</strong>, then confirm with a domain expert — do not leave hot bugs under-labeled.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Priority (<code>priority/p0</code> … <code>priority/p3</code>)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Label</th><th>Meaning</th></tr></thead>
+                <tbody>
+                  <tr><td><code>priority/p0</code></td><td>Schedule <strong>now</strong> — drop / interrupt current work</td></tr>
+                  <tr><td><code>priority/p1</code></td><td>Next — current sprint / immediate queue</td></tr>
+                  <tr><td><code>priority/p2</code></td><td>Soon — planned backlog (near term)</td></tr>
+                  <tr><td><code>priority/p3</code></td><td>When capacity allows</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin-top:0.75rem">Typical pairing (guidance, not automatic): S1 → usually P0/P1; S2 → often P1/P2; S3 → often P2/P3; S4 → usually P3. A high-Severity bug can wait if mitigated; a lower-Severity bug can be <code>priority/p0</code> when it blocks a release or customer commitment.</p>
+          </div>
+
+          <div class="section-card">
+            <p class="eyebrow">Matt <code>/triage</code></p>
+            <h3>Category + state machine</h3>
+            <p><strong>Triage Category</strong> (exactly one): <code>bug</code> or <code>enhancement</code>.</p>
+            <p><strong>Triage State</strong> (exactly one):</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>State</th><th>Meaning</th></tr></thead>
+                <tbody>
+                  <tr><td><code>needs-triage</code></td><td>Maintainer must evaluate</td></tr>
+                  <tr><td><code>needs-info</code></td><td>Waiting on reporter</td></tr>
+                  <tr><td><code>ready-for-agent</code></td><td>Fully specified; agent-ready brief attached</td></tr>
+                  <tr><td><code>ready-for-human</code></td><td>Needs human judgment, access, or design</td></tr>
+                  <tr><td><code>wontfix</code></td><td>Will not action (with reason)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="code-block"><code>unlabeled → needs-triage → (verify claim / repro)
+    ├─ needs-info ⇄ needs-triage
+    ├─ ready-for-agent  (+ agent brief)
+    ├─ ready-for-human  (+ human brief)
+    └─ wontfix          (duplicate / already implemented / rejected / support)</code></pre>
+            <p>AI-generated triage comments <strong>must</strong> start with:</p>
+            <pre class="code-block"><code>&gt; *This was generated by AI during triage.*</code></pre>
+          </div>
+
+          <div class="section-card">
+            <h3>Triage steps (Living SOP §6.3)</h3>
             <ol>
-              <li>Apply severity label.</li>
+              <li>Ensure the report template is complete enough to evaluate (else <code>needs-info</code>).</li>
+              <li>Apply <strong>exactly one</strong> Triage Category and <strong>exactly one</strong> Triage State.</li>
+              <li>Apply <strong>Severity</strong> and <strong>Priority</strong>.</li>
               <li>Add component/area labels (e.g. <code>auth</code>, <code>dashboard</code>, <code>mobile</code>).</li>
-              <li>Assign or move to Backlog.</li>
-              <li>Use <code>/triage</code> where available.</li>
+              <li><strong>Verify the claim</strong> — for bugs: reproduce from STR or agree the STR is sufficient. Outcomes: confirmed / failed / insufficient detail.</li>
+              <li>Route: assign owner, place on backlog, or attach agent/human brief for <code>ready-for-*</code>.</li>
+              <li>Deduplicate; close duplicates as <code>wontfix</code> with a pointer to the canonical ticket.</li>
             </ol>
           </div>
 
           <div class="section-card">
-            <h3>Exercise</h3>
-            <p>Rewrite this weak report into the mandatory template (in a note or draft issue):</p>
-            <blockquote><p>“Dashboard is broken on mobile sometimes. Customers are complaining.”</p></blockquote>
+            <h3>Needs-info stale policy (~14 days)</h3>
+            <ol>
+              <li>Request missing information once using the needs-info template.</li>
+              <li>Nudge if there is no reply after ~7 days.</li>
+              <li>If <strong>~14 days</strong> pass with no reporter reply, <strong>close</strong> (or re-close) with a polite note that the ticket can be reopened when details arrive.</li>
+              <li>When the reporter replies, move <code>needs-info</code> → <code>needs-triage</code> and re-evaluate.</li>
+            </ol>
+            <pre class="code-block"><code>## Triage Notes
+
+**What we've established so far:**
+
+- point 1
+- point 2
+
+**What we still need from you (@reporter):**
+
+- question 1
+- question 2</code></pre>
+          </div>
+
+          <div class="section-card">
+            <h3>Non-bug routing</h3>
+            <p>Keep the bug queue for defects. Route other intake quickly:</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Signal</th><th>Action</th></tr></thead>
+                <tbody>
+                  <tr><td>Duplicate</td><td><code>wontfix</code> + link to canonical issue</td></tr>
+                  <tr><td>Support / how-to / question</td><td>Close or redirect to support channel; not <code>bug</code> work</td></tr>
+                  <tr><td>Feature request</td><td>Category <code>enhancement</code> (not severity theater on a fake bug)</td></tr>
+                  <tr><td>Already implemented</td><td><code>wontfix</code> + pointer to code/docs</td></tr>
+                  <tr><td>Out of scope / rejected</td><td><code>wontfix</code> + record per Matt triage skill</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Security — private advisory path</h3>
+            <p>Do <strong>not</strong> file public issues with exploit details, secrets, or reproducible attack steps.</p>
+            <ul>
+              <li>Prefer the repository’s private vulnerability reporting / security advisory flow (GitHub private reporting and/or <code>SECURITY.md</code> where present).</li>
+              <li>Triage may still assign high Severity once the report is in the private channel.</li>
+              <li>Public tickets, if any, stay high-level (“security issue under private advisory”) without payload.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <p class="eyebrow">Paper Exercise B</p>
+            <h3>Calibrate Severity, Priority, and state</h3>
+            <p>For each scenario, assign <code>severity/s*</code>, <code>priority/p*</code>, and a Triage State (plus Category if not obviously a bug). Then reveal the facilitator key.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>Scenario</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Login 500s for all users in production; no workaround</td></tr>
+                  <tr><td>2</td><td>CSV export wrong column order for one enterprise tenant; they can export via API as a temporary workaround</td></tr>
+                  <tr><td>3</td><td>Typo on settings empty state</td></tr>
+                  <tr><td>4</td><td>XSS in a shared comment field (active risk)</td></tr>
+                  <tr><td>5</td><td>“App feels slow sometimes” with no metrics, STR, or environment</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" data-reveal="ex-b-answer" aria-expanded="false">Show facilitator key</button>
+            <div class="reveal-answer" id="ex-b-answer">
+              <ol>
+                <li><strong>Login 500s:</strong> <code>severity/s1</code>, usually <code>priority/p0</code>; <code>needs-triage</code> → verify → <code>ready-for-human</code> or <code>ready-for-agent</code> with brief. Treat as Incident if customer-visible outage needs multi-team restore (Module 5).</li>
+                <li><strong>CSV column order (one tenant, API workaround):</strong> often <code>severity/s3</code> (reasonable workaround) or <code>severity/s2</code> if the tenant’s primary workflow is blocked and workaround is costly; Priority often <code>priority/p1</code>–<code>priority/p2</code>. May start <code>needs-info</code> for a sample file / expected columns.</li>
+                <li><strong>Typo:</strong> <code>severity/s4</code>, <code>priority/p3</code>; can go <code>ready-for-agent</code> quickly once confirmed.</li>
+                <li><strong>XSS:</strong> impact often <code>severity/s1</code> (or <code>severity/s2</code>); use the <strong>private security path</strong> — not public exploit writeups. Priority usually <code>priority/p0</code>/<code>priority/p1</code>.</li>
+                <li><strong>“Feels slow sometimes”:</strong> do not severity-guess — <code>needs-info</code> first (metrics, STR, environment). Close after ~14d with no reply per stale policy.</li>
+              </ol>
+            </div>
           </div>
 
           <div class="section-card">
             <h3>Checklist</h3>
             <ul class="checklist">
-              <li><label><input type="checkbox" data-progress="m2-c1" data-module="module-2" /><span>I can list every required template section.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m2-c2" data-module="module-2" /><span>I can distinguish P1 vs P2 vs P3 vs P4.</span></label></li>
-              <li><label><input type="checkbox" data-progress="m2-c3" data-module="module-2" /><span>I rewrote the weak report into the template.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m2-c1" data-module="module-2" /><span>I can distinguish <code>severity/s1</code>–<code>severity/s4</code> from <code>priority/p0</code>–<code>priority/p3</code> and state S1/S2 triage SLAs (≤1h / ≤4h).</span></label></li>
+              <li><label><input type="checkbox" data-progress="m2-c2" data-module="module-2" /><span>I can name the five Triage States and know work starts only at <code>ready-for-agent</code> / <code>ready-for-human</code>.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m2-c3" data-module="module-2" /><span>I completed Paper Exercise B (S/P + state for each scenario) and know needs-info ~14d, non-bug routing, and the security private path.</span></label></li>
             </ul>
           </div>
 
           <div class="section-card self-check">
             <h3>Self-check</h3>
             <div class="self-check-item">
-              <p>What is the triage SLA for a P1?</p>
+              <p>What is the triage SLA for <code>severity/s1</code>? Is that the same as Priority?</p>
               <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc2-1">Show answer</button>
-              <div class="reveal-answer" id="sc2-1">Triage within 1 hour.</div>
+              <div class="reveal-answer" id="sc2-1">First triage response within 1 hour. That is a Severity-driven SLA — Priority is a separate scheduling label (often <code>priority/p0</code> or <code>priority/p1</code> for S1, but not automatic).</div>
+            </div>
+            <div class="self-check-item">
+              <p>When does diagnosis / fix work start?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc2-2">Show answer</button>
+              <div class="reveal-answer" id="sc2-2">Only when Triage State is <code>ready-for-agent</code> or <code>ready-for-human</code> — after the claim is verified (or STR agreed sufficient), not while stuck in <code>needs-triage</code> or <code>needs-info</code>.</div>
             </div>
           </div>
         </section>

@@ -35,21 +35,22 @@ https://practical-office.github.io/bug-handling-sop/
 
 ---
 
-## Course modules (v1)
+## Course structure (Five-Module D-stack)
 
-1. Why good bug processes matter (~15 min)
-2. Reporting & triage (~20 min)
-3. Diagnosis & fixing with skills (~30–40 min — may split later)
-4. Review, closure & prevention (~20–25 min)
+- Hub “Why” + **Setup** pre-req (`setup.html`) — not numbered
+- **1** Report · **2** Triage · **3** Diagnosis · **4** Fix · **5** Review/Prevention
+- Duration ≈ 2.5–3.5h (workshop ≈ 3h) — see [`docs/reference/WORKSHOP-AGENDA.md`](docs/reference/WORKSHOP-AGENDA.md)
+- Evidence Pack cert: `docs/certification.html`
+- Exercise Lab: `exercises/invoice-api`
 
 ---
 
 ## Recommended next steps
 
-1. Enable GitHub Pages: **Settings → Pages → Deploy from branch → `main` / `/docs`**
+1. Confirm GitHub Pages: **Settings → Pages → Deploy from branch → `main` / `/docs`**
 2. Open this folder in its own Cursor window
-3. Walk Module 3 with the team; decide whether to split it
-4. Create a wayfinder map issue when ready for iterative course work
+3. Wave 4: commit/push for Review; run Post-Publish QA (first cohort)
+4. Keep wayfinder map updated on `Practical-Office/bug-handling-sop`
 
 ---
 

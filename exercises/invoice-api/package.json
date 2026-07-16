@@ -1,0 +1,20 @@
+{
+  "name": "invoice-api-exercise-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Training fixture for Practical-Office/bug-handling-sop course Modules 3/4. Intentional Accept-Timezone bug. Not BookIQ/product code.",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "phase1": "tsx scripts/phase1-red.ts",
+    "test": "tsx scripts/phase1-red.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

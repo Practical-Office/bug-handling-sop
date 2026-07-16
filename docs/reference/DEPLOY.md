@@ -25,7 +25,13 @@ Open in browser:
 
 - Hub: https://practical-office.github.io/bug-handling-sop/
 - Quick ref: https://practical-office.github.io/bug-handling-sop/quick-reference.html
+- Setup: https://practical-office.github.io/bug-handling-sop/setup.html
 - Module 1: https://practical-office.github.io/bug-handling-sop/module-1.html
+- Module 2: https://practical-office.github.io/bug-handling-sop/module-2.html
+- Module 3: https://practical-office.github.io/bug-handling-sop/module-3.html
+- Module 4: https://practical-office.github.io/bug-handling-sop/module-4.html
+- Module 5: https://practical-office.github.io/bug-handling-sop/module-5.html
+- Certification: https://practical-office.github.io/bug-handling-sop/certification.html
 
 ## Local preview
 

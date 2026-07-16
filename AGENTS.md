@@ -19,7 +19,7 @@ Product bugs and live BookIQ issues stay on **`Book-IQ/bookiqv1-rc`** (or the ow
 3. **Skills-driven** — diagnosis uses `/diagnosing-bugs`; fixes use `/tdd`; review uses `/code-review`.
 4. **Documentation discipline** — every closed bug includes root cause + prevention notes.
 5. **Do not edit BookIQ product code, ledger, or live product issues** from this training workspace.
-6. **Course structure:** 4 modules for now; Module 3 may split later if it grows.
+6. **Course structure:** Five-Module Course — (1) Report, (2) Triage, (3) Diagnosis, (4) Fix, (5) Review/Prevention — plus hub intro (“Why”) and a Setup pre-req page (`setup.html`, not numbered).
 
 ## Skills
 
@@ -36,8 +36,10 @@ Use Matt/Cursor skills: `/diagnosing-bugs`, `/tdd`, `/code-review`, `/grill-with
 | Path | Purpose |
 |------|---------|
 | `docs/index.html` | Course hub (GitHub Pages entry) |
-| `docs/module-*.html` | Modules 1–4 |
+| `docs/setup.html` | Setup pre-req (skills install; not numbered) |
+| `docs/module-1.html` … `module-5.html` | Modules 1–5 (Report → Triage → Diagnosis → Fix → Review) |
 | `docs/quick-reference.html` | Printable one-pager (template + severity) |
 | `docs/course-full.html` | Printable full course |
+| `docs/certification.html` | Evidence Pack certification |
 | `docs/reference/BUG-HANDLING-SOP.md` | Living SOP (source of truth) |
 | `.github/ISSUE_TEMPLATE/bug-report.md` | Teaching copy of bug report template |

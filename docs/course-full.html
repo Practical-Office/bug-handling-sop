@@ -15,9 +15,11 @@
     .print-page .main { margin: 0; max-width: 48rem; margin-inline: auto; padding: 1.5rem; }
     .print-page .module { break-inside: avoid; margin-bottom: 2.5rem; page-break-after: always; }
     .print-page .module:last-of-type { page-break-after: auto; }
+    .print-page .print-toc a { color: inherit; }
     @media print {
       .no-print { display: none !important; }
       .print-page .module { page-break-after: always; }
+      .print-page .module:last-of-type { page-break-after: auto; }
     }
   </style>
 </head>
@@ -25,66 +27,235 @@
   <div class="main">
     <header class="topbar no-print" style="position:static;display:flex;justify-content:space-between;align-items:center;padding:1rem 0;margin-bottom:1rem">
       <div class="topbar-title">Full course — print</div>
-      <button type="button" class="btn btn-primary btn-sm" id="printCourse">Print / Save as PDF</button>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <a class="btn btn-ghost btn-sm" href="index.html">← Hub</a>
+        <button type="button" class="btn btn-primary btn-sm" id="printCourse">Print / Save as PDF</button>
+      </div>
     </header>
     <main class="content">
       <section class="hero">
-        <span class="status-chip">Practical AI</span>
+        <span class="status-chip">Practical AI · Printable path</span>
         <h1>Bug Handling SOP</h1>
-        <p class="hero-lede">Full printable course (~90–120 min). Living SOP: docs/reference/BUG-HANDLING-SOP.md</p>
+        <p class="hero-lede">Five-Module Course + Setup Pre-req (~2.5–3.5h; workshop ≈ 3h). Use <strong>Print → Save as PDF</strong>. Interactive exercises live on the site pages linked below.</p>
       </section>
 
-      <section class="module">
-        <div class="module-header"><div class="module-badge">1</div><div><h2>Why good bug processes matter</h2><p class="module-time">~15 min</p></div></div>
+      <div class="section-card print-toc">
+        <p class="eyebrow">Contents</p>
+        <ol>
+          <li><a href="#why">Why (hub intro)</a></li>
+          <li><a href="#setup">Setup Pre-req</a> · live: <a href="setup.html">setup.html</a></li>
+          <li><a href="#m1">Module 1 — Report</a> · <a href="module-1.html">module-1.html</a></li>
+          <li><a href="#m2">Module 2 — Triage</a> · <a href="module-2.html">module-2.html</a></li>
+          <li><a href="#m3">Module 3 — Diagnosis</a> · <a href="module-3.html">module-3.html</a></li>
+          <li><a href="#m4">Module 4 — Fix</a> · <a href="module-4.html">module-4.html</a></li>
+          <li><a href="#m5">Module 5 — Review / Prevention</a> · <a href="module-5.html">module-5.html</a></li>
+          <li><a href="#ref">Key reference</a> · <a href="quick-reference.html">quick-reference.html</a></li>
+        </ol>
+        <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--ink-faint)">
+          Living SOP: <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md">BUG-HANDLING-SOP.md</a> ·
+          Workshop: <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/WORKSHOP-AGENDA.md">WORKSHOP-AGENDA.md</a> ·
+          Cert: <a href="certification.html">certification.html</a> ·
+          After: <a href="next-steps.html">next-steps.html</a>
+        </p>
+      </div>
+
+      <!-- Why -->
+      <section class="module" id="why">
+        <div class="module-header"><div class="module-badge">⌂</div><div><h2>Why a shared bug process matters</h2><p class="module-time">Hub intro · not a numbered module</p></div></div>
         <div class="section-card">
-          <h3>Goals</h3>
-          <ul>
-            <li>Reduce time-to-resolution</li>
-            <li>Improve reproducibility and root cause analysis</li>
-            <li>Enforce testing and prevent regressions</li>
-            <li>Build Cursor skills muscle memory</li>
-            <li>Measurable improvement in quality and velocity</li>
-          </ul>
+          <p>Without a common loop, every engineer invents intake, triage, and fix habits. Incomplete tickets, mixed severity language, and untested patches burn time. This course teaches one end-to-end path so the team ships fewer regressions and closes with Root Cause + Prevention.</p>
           <h3>Principles</h3>
-          <p>Reproducibility first · Skills-driven · Root cause + prevention · TDD + review mandatory · Improve quarterly</p>
+          <p>Reproducibility First (fulfilled by Diagnosis Loop Phases 1–2) · Skills-driven · Root Cause + Prevention · <code>/tdd</code> + <code>/code-review</code> mandatory · Improve quarterly</p>
+          <h3>End-to-end flow</h3>
+          <pre class="code-block"><code>Report → (/grill-*) → /triage → /diagnosing-bugs → /tdd → PR → /code-review → QA → RCA/Prevention → Close
+                                                                              → (outage S1) Incident + Postmortem</code></pre>
         </div>
       </section>
 
-      <section class="module">
-        <div class="module-header"><div class="module-badge">2</div><div><h2>Reporting &amp; triage</h2><p class="module-time">~20 min</p></div></div>
+      <!-- Setup -->
+      <section class="module" id="setup">
+        <div class="module-header"><div class="module-badge">⚙</div><div><h2>Setup Pre-req — Skills install</h2><p class="module-time">~15 min · complete before Module 1</p></div></div>
         <div class="section-card">
-          <h3>Template fields</h3>
-          <p>Title · Environment · Reproduction Steps · Expected · Actual · Logs/Screenshots · Business Impact</p>
-          <h3>Severity</h3>
-          <p><strong>P1</strong> triage 1h · <strong>P2</strong> 4h · <strong>P3</strong> minor · <strong>P4</strong> cosmetic</p>
+          <h3>Objectives</h3>
+          <ul>
+            <li>Install Matt Pocock skills for Cursor (bug-handling set).</li>
+            <li>Run <code>/setup-matt-pocock-skills</code> once per repo.</li>
+            <li>Know user-invoked vs model-invoked skills for bug work.</li>
+          </ul>
+          <h3>Install</h3>
+          <pre class="code-block"><code>npx skills@latest add mattpocock/skills</code></pre>
+          <p>Minimum set: <code>diagnosing-bugs</code>, <code>tdd</code>, <code>triage</code>, <code>code-review</code>, grill skills, <code>setup-matt-pocock-skills</code>.</p>
+          <h3>Confirm</h3>
+          <p>Invoke <code>/diagnosing-bugs</code>, <code>/tdd</code>, <code>/code-review</code>, <code>/triage</code>. Verify <code>docs/agents/</code> issue-tracker + triage-label docs exist for the repo you configure.</p>
+          <p><strong>Live page:</strong> <a href="setup.html">setup.html</a> (checklists + self-check).</p>
         </div>
       </section>
 
-      <section class="module">
-        <div class="module-header"><div class="module-badge">3</div><div><h2>Diagnosis &amp; fixing</h2><p class="module-time">~30–40 min</p></div></div>
+      <!-- Module 1 -->
+      <section class="module" id="m1">
+        <div class="module-header"><div class="module-badge">1</div><div><h2>Report — Bug Reporting Standards</h2><p class="module-time">~25 min</p></div></div>
         <div class="section-card">
-          <h3>Skills</h3>
-          <p><code>/diagnosing-bugs</code> then <code>/tdd</code></p>
-          <h3>Loop</h3>
-          <p>Reproduce → Minimize → Hypothesize → Instrument → Fix → Regression test</p>
-          <h3>Workflow</h3>
+          <h3>Hard truth</h3>
+          <p>Incomplete tickets get returned. Reporting is the first feedback loop — do not guess missing fields.</p>
+          <h3>Mandatory template</h3>
+          <pre class="code-block"><code>**Title:** [Clear, concise description]
+
+**Environment**
+- Browser / OS / Version:
+- Backend / API version:
+- User role / permissions:
+- Other relevant context:
+
+**Reproduction Steps**
+1.
+2.
+3.
+
+**Expected Behavior**
+**Actual Behavior**
+**Logs / Screenshots / Video**
+**Business / User Impact**</code></pre>
+          <h3>Tips</h3>
+          <ul>
+            <li>STR ≤ ~6 steps; one clear failure mode.</li>
+            <li>Impact specific (who / how many / workaround?).</li>
+            <li>Vague intake → <code>/grill-me</code> or <code>/grill-with-docs</code>.</li>
+          </ul>
+          <p><strong>Paper Exercise A:</strong> rewrite a weak report (on <a href="module-1.html">module-1.html</a>).</p>
+        </div>
+      </section>
+
+      <!-- Module 2 -->
+      <section class="module" id="m2">
+        <div class="module-header"><div class="module-badge">2</div><div><h2>Triage Process</h2><p class="module-time">~30 min</p></div></div>
+        <div class="section-card">
+          <h3>Hard truth</h3>
+          <p>Triage is confirmation + routing. Work starts only at <code>ready-for-agent</code> or <code>ready-for-human</code>.</p>
+          <h3>Severity ≠ Priority</h3>
+          <p><strong>Severity</strong> = impact (how bad). <strong>Priority</strong> = schedule (when). Do not collapse into a mixed P1–P4 impact scale.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Severity</th><th>Meaning</th><th>Triage SLA</th></tr></thead>
+              <tbody>
+                <tr><td><code>severity/s1</code></td><td>Critical / no acceptable workaround</td><td>≤ 1h</td></tr>
+                <tr><td><code>severity/s2</code></td><td>Major / complex or partial workaround</td><td>≤ 4h</td></tr>
+                <tr><td><code>severity/s3</code></td><td>Moderate / reasonable workaround</td><td>Normal cadence</td></tr>
+                <tr><td><code>severity/s4</code></td><td>Low / cosmetic</td><td>Normal cadence</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:0.75rem"><strong>Priority:</strong> <code>priority/p0</code> now · <code>p1</code> next · <code>p2</code> soon · <code>p3</code> when capacity.</p>
+          <h3>Triage Category + State</h3>
+          <p>Category (one): <code>bug</code> | <code>enhancement</code>.</p>
+          <p>State (one): <code>needs-triage</code> · <code>needs-info</code> (~14d stale) · <code>ready-for-agent</code> · <code>ready-for-human</code> · <code>wontfix</code>.</p>
+          <p><strong>Paper Exercise B:</strong> calibrate S/P + state on <a href="module-2.html">module-2.html</a>.</p>
+        </div>
+      </section>
+
+      <!-- Module 3 -->
+      <section class="module" id="m3">
+        <div class="module-header"><div class="module-badge">3</div><div><h2>Diagnosis Mastery</h2><p class="module-time">~45 min</p></div></div>
+        <div class="section-card">
+          <h3>Hard truth</h3>
+          <p>Diagnosis without a minimized reproduction is guessing. Build a red-capable feedback loop <em>before</em> hypothesising.</p>
+          <h3>Diagnosis Loop — six phases (<code>/diagnosing-bugs</code>)</h3>
           <ol>
-            <li>In Progress → diagnose → minimal repro → TDD fix → tests → document findings</li>
+            <li><strong>Build a feedback loop</strong> — one red-capable, deterministic, agent-runnable command you have already run.</li>
+            <li><strong>Reproduce + minimise</strong> — confirm the user’s failure; shrink until every element is load-bearing.</li>
+            <li><strong>Hypothesise</strong> — 3–5 ranked, falsifiable predictions before testing any.</li>
+            <li><strong>Instrument</strong> — one variable at a time; tagged probes.</li>
+            <li><strong>Fix + regression test</strong> — preview here; Module 4 owns the green path via <code>/tdd</code>.</li>
+            <li><strong>Cleanup + post-mortem</strong> — remove debug noise; winning hypothesis; prevention question.</li>
           </ol>
+          <p><strong>Reproducibility First</strong> is a principle fulfilled by Phases 1–2 — not a competing top-level “reproduce then patch” shortcut.</p>
+          <h3>Exercise Lab</h3>
+          <p><code>exercises/invoice-api</code> — intentional <code>Accept-Timezone</code> bug (empty invoices). Phase 1:</p>
+          <pre class="code-block"><code>cd exercises/invoice-api && npm install && npm run phase1
+# expect red / non-zero exit</code></pre>
+          <p>Full walkthrough: <a href="module-3.html">module-3.html</a>.</p>
         </div>
       </section>
 
-      <section class="module">
-        <div class="module-header"><div class="module-badge">4</div><div><h2>Review, closure &amp; prevention</h2><p class="module-time">~20–25 min</p></div></div>
+      <!-- Module 4 -->
+      <section class="module" id="m4">
+        <div class="module-header"><div class="module-badge">4</div><div><h2>Fixing with <code>/tdd</code></h2><p class="module-time">~35 min</p></div></div>
         <div class="section-card">
+          <h3>Hard truth</h3>
+          <p>TDD without a failing test first is theater. Speculative refactors in a bug PR create new regressions.</p>
+          <h3>Prerequisites</h3>
+          <ul>
+            <li>Red Phase 1 from Module 3 / lab.</li>
+            <li>Minimisation story + ranked hypotheses.</li>
+            <li>Agreed <strong>correct seam</strong> for the regression test.</li>
+            <li>On real tickets: Triage State <code>ready-for-*</code>.</li>
+          </ul>
+          <h3>Rules</h3>
           <ol>
-            <li>PR references ticket</li>
-            <li><code>/code-review</code></li>
-            <li>Ticket: <strong>Root Cause</strong> + <strong>Prevention</strong></li>
-            <li>QA verifies → close</li>
+            <li>Red before green — failing test first, then minimal fix.</li>
+            <li>One vertical slice at a time at a confirmed seam.</li>
+            <li>Refactor is not part of red→green — park for <code>/code-review</code> (Module 5).</li>
+            <li>Re-run the <strong>original</strong> un-minimised Phase 1 command after green.</li>
           </ol>
+          <p>Continue Invoice API lab on <a href="module-4.html">module-4.html</a> — not product backlog.</p>
+        </div>
+      </section>
+
+      <!-- Module 5 -->
+      <section class="module" id="m5">
+        <div class="module-header"><div class="module-badge">5</div><div><h2>Review &amp; prevention</h2><p class="module-time">~30 min</p></div></div>
+        <div class="section-card">
+          <h3>Closure workflow</h3>
+          <ol>
+            <li>PR references ticket + winning hypothesis.</li>
+            <li><code>/code-review</code> — Standards ‖ Spec (parallel; never merge axes).</li>
+            <li>Ticket: <strong>Root Cause</strong> + <strong>Prevention</strong>.</li>
+            <li>QA verifies → close. Follow-ups as separate tickets.</li>
+          </ol>
+          <h3>Standards ‖ Spec</h3>
+          <ul>
+            <li><strong>Standards:</strong> Does the diff follow repo conventions?</li>
+            <li><strong>Spec:</strong> Does the diff faithfully fix the originating issue?</li>
+          </ul>
+          <h3>Closure template</h3>
+          <pre class="code-block"><code>**Root Cause:** [mechanism — what broke and why]
+**Prevention:**
+- [ ] Regression test at seam: …
+- [ ] Guard / validation: …
+- [ ] Docs / CONTEXT.md: …
+- [ ] Architecture follow-up (if seam missing): …</code></pre>
+          <h3>Incident + Postmortem (thin)</h3>
+          <p>Escalate when customer-visible outage, multi-team response, or stuck investigation. Restore first. Blameless Postmortem required for outage-class <code>severity/s1</code> Incidents — not every S1 label.</p>
           <h3>Metrics</h3>
-          <p>Time to fix by severity · % with repro steps · % with regression tests · recurring rate · team feedback</p>
+          <p>Track by <code>severity/s*</code> (not mixed P1–P4 as impact). Triage SLA hit rate · % with red Phase 1 · % with regression tests · recurring rate · <code>needs-info</code> age · team feedback.</p>
+          <p>Certify with an <a href="certification.html">Evidence Pack</a>. Live teaching: <a href="module-5.html">module-5.html</a>.</p>
+        </div>
+      </section>
+
+      <!-- Key reference -->
+      <section class="module" id="ref">
+        <div class="module-header"><div class="module-badge">⚡</div><div><h2>Key reference</h2><p class="module-time">One-pager + cert + homework</p></div></div>
+        <div class="section-card">
+          <h3>Skills cheatsheet</h3>
+          <pre class="code-block"><code>/setup-matt-pocock-skills   # once per repo (Setup Pre-req)
+/grill-me | /grill-with-docs
+/triage                     # category, state, Severity, Priority
+/diagnosing-bugs            # six-phase Diagnosis Loop
+/tdd                        # red → green at agreed seams
+/code-review                # Standards ‖ Spec
+/ask-matt                   # which skill?</code></pre>
+          <h3>Evidence Pack (certification)</h3>
+          <ol>
+            <li>Rewritten report OR Paper Exercise A (full template).</li>
+            <li>Phase 1 command + red output (Exercise Lab or real bug).</li>
+            <li>Root Cause + Prevention (closed ticket or lab fix path).</li>
+            <li>Lead review — pack not done until approved or gaps waived in writing.</li>
+          </ol>
+          <p>Details: <a href="certification.html">certification.html</a>.</p>
+          <h3>Homework F</h3>
+          <p>Complete 1–2 real (or sandbox) bugs end-to-end. See <a href="next-steps.html">next-steps.html</a>.</p>
+          <h3>First cohort</h3>
+          <p>Post-Publish QA verifies Living SOP ↔ Published Course ↔ Exercise Lab before treating the course as final. File gaps on this repo.</p>
+          <p style="margin-top:1rem"><a href="quick-reference.html">Open interactive quick reference →</a></p>
         </div>
       </section>
     </main>

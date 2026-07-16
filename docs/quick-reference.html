@@ -26,42 +26,117 @@
         <section class="hero">
           <span class="status-chip">One-pager</span>
           <h1>Bug Handling <em>quick reference</em></h1>
-          <p class="hero-lede">Template, severity, skills chain, and closure fields — print and keep nearby.</p>
+          <p class="hero-lede">Template, Severity/Priority, triage states, Diagnosis Loop, skills — print and keep nearby.</p>
         </section>
 
         <div class="section-card">
           <h3>Principles</h3>
-          <p>Reproducibility first · Skills-driven · Root cause + prevention · TDD + review mandatory · Improve quarterly</p>
+          <p>Reproducibility First · Skills-driven · Root Cause + Prevention · <code>/tdd</code> + <code>/code-review</code> mandatory · Improve quarterly</p>
         </div>
 
         <div class="section-card">
-          <h3>Severity</h3>
-          <p><strong>P1</strong> 1h · <strong>P2</strong> 4h · <strong>P3</strong> backlog · <strong>P4</strong> cosmetic</p>
+          <h3>End-to-end flow</h3>
+          <pre class="code-block"><code>Report → (/grill-*) → /triage → /diagnosing-bugs → /tdd → PR → /code-review → QA → RCA/Prevention → Close
+                                                                              → (outage S1) Incident + Postmortem</code></pre>
         </div>
 
         <div class="section-card">
-          <h3>Skills chain</h3>
-          <p><code>/diagnosing-bugs</code> → <code>/tdd</code> → <code>/code-review</code></p>
-          <p>Optional: <code>/triage</code>, <code>/grill-with-docs</code></p>
-        </div>
-
-        <div class="section-card">
-          <h3>Diagnostic loop</h3>
-          <p>Reproduce → Minimize → Hypothesize → Instrument → Fix → Regression test</p>
-        </div>
-
-        <div class="section-card">
-          <h3>Bug template</h3>
+          <h3>Bug report template</h3>
           <div class="copy-row no-print" style="margin-bottom:0.75rem">
             <button type="button" class="btn btn-primary btn-sm" data-copy-template>Copy template</button>
             <span class="copy-feedback" aria-live="polite"></span>
           </div>
-          <pre class="code-block"><code>Title · Environment · Reproduction Steps · Expected · Actual · Logs/Screenshots · Business Impact</code></pre>
+          <pre class="code-block"><code>Title · Environment · Reproduction Steps · Expected · Actual · Logs/Screenshots · Business/User Impact
+(+ optional Suggested Severity / Priority — triage confirms)</code></pre>
         </div>
 
         <div class="section-card">
-          <h3>Closure must include</h3>
-          <p><strong>Root Cause</strong> + <strong>Prevention</strong></p>
+          <h3>Severity <code>severity/s1</code>–<code>severity/s4</code></h3>
+          <p>Impact (how bad). Workaround-aware. Not the same as Priority.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Label</th><th>Meaning</th><th>Triage SLA</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>severity/s1</code></td><td>Critical: outage, data loss, active security risk, core flow blocked — no acceptable workaround</td><td>≤ 1h</td></tr>
+                <tr><td><code>severity/s2</code></td><td>Major: significant break for many users — workaround complex/partial</td><td>≤ 4h</td></tr>
+                <tr><td><code>severity/s3</code></td><td>Moderate: limited/secondary — reasonable workaround</td><td>Normal cadence</td></tr>
+                <tr><td><code>severity/s4</code></td><td>Low: cosmetic / polish</td><td>Normal cadence</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Priority <code>priority/p0</code>–<code>priority/p3</code></h3>
+          <p>Scheduling (when we work it), given Severity and capacity.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Label</th><th>Meaning</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>priority/p0</code></td><td>Schedule <strong>now</strong> — interrupt</td></tr>
+                <tr><td><code>priority/p1</code></td><td>Next — current sprint / immediate queue</td></tr>
+                <tr><td><code>priority/p2</code></td><td>Soon — near-term backlog</td></tr>
+                <tr><td><code>priority/p3</code></td><td>When capacity allows</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Triage Category &amp; State</h3>
+          <p><strong>Category (exactly one):</strong> <code>bug</code> · <code>enhancement</code></p>
+          <p><strong>State (exactly one):</strong></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>State</th><th>Meaning</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>needs-triage</code></td><td>Maintainer must evaluate</td></tr>
+                <tr><td><code>needs-info</code></td><td>Waiting on reporter (~14d stale → close/nudge)</td></tr>
+                <tr><td><code>ready-for-agent</code></td><td>Fully specified; agent brief attached</td></tr>
+                <tr><td><code>ready-for-human</code></td><td>Needs human judgment / access / design</td></tr>
+                <tr><td><code>wontfix</code></td><td>Will not action (with reason)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Work starts only at <code>ready-for-agent</code> or <code>ready-for-human</code>.</p>
+        </div>
+
+        <div class="section-card">
+          <h3>Diagnosis Loop — 6 phases</h3>
+          <ol>
+            <li><strong>Feedback loop</strong> — one red-capable, deterministic command</li>
+            <li><strong>Reproduce + minimise</strong> — shrink until every part is load-bearing</li>
+            <li><strong>Hypothesise</strong> — 3–5 ranked, falsifiable hypotheses</li>
+            <li><strong>Instrument</strong> — one variable at a time; tagged probes</li>
+            <li><strong>Fix + regression test</strong> — prefer test-before-fix at a correct seam; <code>/tdd</code></li>
+            <li><strong>Cleanup + post-mortem</strong> — green loop, remove debug harnesses, ticket RCA</li>
+          </ol>
+        </div>
+
+        <div class="section-card">
+          <h3>Skills cheatsheet</h3>
+          <pre class="code-block"><code>/setup-matt-pocock-skills   # once per repo (Setup Pre-req)
+/grill-me                   # clarify vague report/plan
+/grill-with-docs            # clarify + domain docs
+/triage                     # category, state, Severity, Priority, route
+/diagnosing-bugs            # six-phase Diagnosis Loop
+/tdd                        # red → green vertical slices
+/code-review                # Standards ‖ Spec (parallel)
+/ask-matt                   # which skill?</code></pre>
+          <p><strong>Chain:</strong> <code>/diagnosing-bugs</code> → <code>/tdd</code> → <code>/code-review</code></p>
+        </div>
+
+        <div class="section-card">
+          <h3>Closure card</h3>
+          <pre class="code-block"><code>**Root Cause:** [mechanism — what broke and why]
+**Prevention:** regression test · guard · docs · arch follow-up</code></pre>
+          <p>Outage-class <code>severity/s1</code> Incident → also blameless Postmortem with owned actions.</p>
         </div>
 
         <div class="page-nav no-print" id="pageNav"></div>
