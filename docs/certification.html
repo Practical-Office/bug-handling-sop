@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certification | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="certification" data-base="" data-file="certification.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Certification</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="hero">
+          <span class="status-chip">Sign-off</span>
+          <h1>Bug Handling <em>certification</em></h1>
+          <p class="hero-lede">Check each item when true. Share completion with your lead.</p>
+        </section>
+        <div class="section-card">
+          <ul class="checklist">
+            <li><label><input type="checkbox" data-progress="cert-1" data-module="certification" /><span>I completed Modules 1–4 checklists.</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-2" data-module="certification" /><span>I can write a complete bug report from the mandatory template.</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-3" data-module="certification" /><span>I can run <code>/diagnosing-bugs</code> then <code>/tdd</code> on a fix.</span></label></li>
+            <li><label><input type="checkbox" data-progress="cert-4" data-module="certification" /><span>I will document Root Cause + Prevention on every closed bug.</span></label></li>
+          </ul>
+        </div>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bug Handling SOP Onboarding — Practical AI</title>
+  <meta name="description" content="Official Bug Handling SOP onboarding for Practical AI. Report, triage, diagnose, fix, and close bugs with a shared Cursor-skills workflow." />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="hub" data-base="" data-file="index.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Course hub</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="topbarTheme" aria-label="Toggle theme">Theme</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+          <a class="btn btn-primary btn-sm" href="module-1.html">Start module 1 →</a>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="hero">
+          <span class="status-chip">Practical AI team onboarding</span>
+          <h1>Bug Handling <em>SOP</em></h1>
+          <p class="hero-lede">Learn Practical AI’s shared bug process: reproducible reports, severity triage, Cursor skill-driven diagnosis, TDD fixes, and root-cause closure. (~90–120 min)</p>
+        </section>
+
+        <div class="card-grid">
+          <div class="stat-card"><strong>4 modules</strong><span>~90–120 minutes guided</span></div>
+          <div class="stat-card"><strong>Living SOP</strong><span>Edited as process grows</span></div>
+          <div class="stat-card"><strong>Bug template</strong><span>Mandatory report fields</span></div>
+          <div class="stat-card"><strong>Skills-driven</strong><span>diagnose → tdd → review</span></div>
+        </div>
+
+        <div class="section-card">
+          <p class="eyebrow">Source of truth</p>
+          <p>The living process document is <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer"><strong>BUG-HANDLING-SOP.md</strong></a> in this repo. Course modules teach it; when process changes, update the SOP first, then align the modules.</p>
+        </div>
+
+        <div class="section-card" id="toc">
+          <p class="eyebrow">Table of contents</p>
+          <div class="table-wrap" style="margin:0;border:none;box-shadow:none">
+            <table>
+              <thead><tr><th>#</th><th>Module</th><th>Time</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><a href="module-1.html">Why good bug processes matter</a></td><td>~15 min</td></tr>
+                <tr><td>2</td><td><a href="module-2.html">Reporting &amp; triage</a></td><td>~20 min</td></tr>
+                <tr><td>3</td><td><a href="module-3.html">Diagnosis &amp; fixing with skills</a></td><td>~30–40 min</td></tr>
+                <tr><td>4</td><td><a href="module-4.html">Review, closure &amp; prevention</a></td><td>~20–25 min</td></tr>
+                <tr><td>—</td><td><a href="quick-reference.html">Quick reference</a></td><td>print</td></tr>
+                <tr><td>—</td><td><a href="certification.html">Certification</a></td><td>submit</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin:1rem 0 0;font-size:0.9rem;color:var(--ink-faint)">
+            Core skills: <code>/diagnosing-bugs</code> → <code>/tdd</code> → <code>/code-review</code>
+          </p>
+        </div>
+
+        <div class="print-actions no-print">
+          <p class="eyebrow">Save as PDF</p>
+          <p>Open the <a href="course-full.html">full course page</a>, then <strong>Print → Save as PDF</strong>.</p>
+          <button type="button" class="btn btn-primary" id="printCourse" onclick="location.href='course-full.html'">Open printable course →</button>
+        </div>
+
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

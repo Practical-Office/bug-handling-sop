@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 2 — Reporting &amp; triage | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="module-2" data-base="" data-file="module-2.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Module 2</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="module" id="module-2">
+          <div class="module-header">
+            <div class="module-badge">2</div>
+            <div>
+              <h2>Reporting &amp; triage</h2>
+              <p class="module-time">~20 min</p>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Mandatory bug report template</h3>
+            <p>Tickets missing required sections are returned for completion. Copy the template:</p>
+            <div class="copy-row no-print" style="margin-bottom:0.75rem">
+              <button type="button" class="btn btn-primary btn-sm" data-copy-template>Copy bug template</button>
+              <span class="copy-feedback" aria-live="polite"></span>
+            </div>
+            <pre id="bugTemplatePreview" class="code-block"><code>**Title:** [Clear, concise description]
+
+**Environment**
+- Browser / OS / Version:
+- Backend / API version:
+- User role / permissions:
+- Other relevant context:
+
+**Reproduction Steps**
+1.
+2.
+3.
+
+**Expected Behavior**
+**Actual Behavior**
+**Logs / Screenshots / Video**
+**Business / User Impact**</code></pre>
+            <p><strong>Tips:</strong> keep reproduction steps short and reliable; include before/after states; use <code>/grill-with-docs</code> with the reporter if clarification is needed.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Severity levels</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Level</th><th>Meaning</th><th>Triage SLA</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>P1 Blocker</strong></td><td>Outage, security, or core flow blocked</td><td>Within <strong>1 hour</strong></td></tr>
+                  <tr><td><strong>P2 Major</strong></td><td>Significant break for many users</td><td>Within <strong>4 hours</strong></td></tr>
+                  <tr><td><strong>P3 Minor</strong></td><td>Limited users or non-critical paths</td><td>Normal backlog</td></tr>
+                  <tr><td><strong>P4 Cosmetic</strong></td><td>Visual/typo/low-impact UX</td><td>When capacity allows</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ol>
+              <li>Apply severity label.</li>
+              <li>Add component/area labels (e.g. <code>auth</code>, <code>dashboard</code>, <code>mobile</code>).</li>
+              <li>Assign or move to Backlog.</li>
+              <li>Use <code>/triage</code> where available.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Exercise</h3>
+            <p>Rewrite this weak report into the mandatory template (in a note or draft issue):</p>
+            <blockquote><p>“Dashboard is broken on mobile sometimes. Customers are complaining.”</p></blockquote>
+          </div>
+
+          <div class="section-card">
+            <h3>Checklist</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-progress="m2-c1" data-module="module-2" /><span>I can list every required template section.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m2-c2" data-module="module-2" /><span>I can distinguish P1 vs P2 vs P3 vs P4.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m2-c3" data-module="module-2" /><span>I rewrote the weak report into the template.</span></label></li>
+            </ul>
+          </div>
+
+          <div class="section-card self-check">
+            <h3>Self-check</h3>
+            <div class="self-check-item">
+              <p>What is the triage SLA for a P1?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc2-1">Show answer</button>
+              <div class="reveal-answer" id="sc2-1">Triage within 1 hour.</div>
+            </div>
+          </div>
+        </section>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

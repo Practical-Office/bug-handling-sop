@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 3 — Diagnosis &amp; fixing | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="module-3" data-base="" data-file="module-3.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Module 3</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="module" id="module-3">
+          <div class="module-header">
+            <div class="module-badge">3</div>
+            <div>
+              <h2>Diagnosis &amp; fixing with skills</h2>
+              <p class="module-time">~30–40 min <span style="color:var(--ink-faint)">(may split later)</span></p>
+            </div>
+          </div>
+
+          <div class="hard-truth">
+            <h3>Hard truth</h3>
+            <p>Diagnosis without a minimized reproduction is guessing. TDD without a failing test first is theater.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Mandatory skills</h3>
+            <ul>
+              <li><code>/diagnosing-bugs</code> — core diagnostic loop</li>
+              <li><code>/tdd</code> — red → green → refactor for every fix</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Diagnostic loop (<code>/diagnosing-bugs</code>)</h3>
+            <ol>
+              <li><strong>Reproduce</strong> — confirm the report on a known environment.</li>
+              <li><strong>Minimize</strong> — smallest test case that still fails.</li>
+              <li><strong>Hypothesize</strong> — name a falsifiable cause.</li>
+              <li><strong>Instrument</strong> — add logging or probes that can disprove the hypothesis.</li>
+              <li><strong>Fix</strong> — change only what the evidence supports.</li>
+              <li><strong>Regression test</strong> — lock the behavior so it cannot silently return.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Step-by-step workflow</h3>
+            <ol>
+              <li>Acknowledge ticket; set status to <strong>In Progress</strong>.</li>
+              <li>Run <code>/diagnosing-bugs</code>.</li>
+              <li>Create a minimal reproduction if needed.</li>
+              <li>Implement the fix using <code>/tdd</code>.</li>
+              <li>Add or update relevant tests.</li>
+              <li>Document findings in the ticket (partial notes OK before PR).</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Skills setup (one-time)</h3>
+            <ol>
+              <li>Install Matt Pocock skills: <code>npx skills@latest add mattpocock/skills</code></li>
+              <li>Run <code>/setup-matt-pocock-skills</code> in Cursor (if available).</li>
+              <li>Master: <code>diagnosing-bugs</code>, <code>tdd</code>, <code>triage</code>, <code>code-review</code>, <code>grill-me</code> / <code>grill-with-docs</code>.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Paired exercise</h3>
+            <p>With a partner (or agent), pick a sample bug from your product backlog. Run the diagnostic loop out loud through <strong>hypothesize</strong> before writing any fix. Note where you would add the first failing test.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Checklist</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-progress="m3-c1" data-module="module-3" /><span>I can recite the six diagnostic steps in order.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c2" data-module="module-3" /><span>I know when to use <code>/diagnosing-bugs</code> vs <code>/tdd</code>.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c3" data-module="module-3" /><span>I have Matt skills installed (or a plan to install them today).</span></label></li>
+              <li><label><input type="checkbox" data-progress="m3-c4" data-module="module-3" /><span>I walked a sample bug through hypothesize before fixing.</span></label></li>
+            </ul>
+          </div>
+
+          <div class="section-card self-check">
+            <h3>Self-check</h3>
+            <div class="self-check-item">
+              <p>What comes before “Fix” in the diagnostic loop?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc3-1">Show answer</button>
+              <div class="reveal-answer" id="sc3-1">Reproduce → Minimize → Hypothesize → Instrument — then Fix, then Regression test.</div>
+            </div>
+          </div>
+        </section>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

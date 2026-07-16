@@ -1,0 +1,12 @@
+---
+description: Wayfinder tracker conventions for bug-handling-sop
+alwaysApply: true
+---
+
+# Wayfinder tracker
+
+- Map issue labelled `wayfinder:map` is the canonical index on **`Practical-Office/bug-handling-sop`**.
+- Child tickets: `wayfinder:task`, `wayfinder:prototype`, `wayfinder:research`, `wayfinder:grilling`.
+- Claim a ticket (assign) before work; resolve one ticket per session unless research subagents run in parallel.
+- Record resolutions as issue comments; close ticket; append gist + link to map **Decisions so far**.
+- Refer by **linked title**, not bare `#` numbers.

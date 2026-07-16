@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 1 — Why process matters | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="module-1" data-base="" data-file="module-1.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Module 1</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="module" id="module-1">
+          <div class="module-header">
+            <div class="module-badge">1</div>
+            <div>
+              <h2>Why good bug processes matter</h2>
+              <p class="module-time">~15 min</p>
+            </div>
+          </div>
+
+          <div class="hard-truth">
+            <h3>Hard truth</h3>
+            <p>A vague “it broke” ticket is not a bug report — it is a time sink. Without reproduction, severity, and a closed loop to prevention, the same class of bug returns.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Goals of this process</h3>
+            <ul>
+              <li>Reduce time-to-resolution</li>
+              <li>Improve reproducibility and root cause analysis</li>
+              <li>Enforce testing and prevent regressions</li>
+              <li>Build team muscle memory with Cursor skills</li>
+              <li>Create measurable improvement in bug quality and velocity</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Core principles</h3>
+            <ul>
+              <li><strong>Reproducibility first:</strong> if we cannot reliably reproduce it, we do not start fixing it.</li>
+              <li><strong>Skills-driven:</strong> major steps use Matt Pocock skills (<code>mattpocock/skills</code>).</li>
+              <li><strong>Documentation discipline:</strong> every ticket ends with root cause + prevention notes.</li>
+              <li><strong>No shortcuts:</strong> TDD and code review are mandatory for production bugs.</li>
+              <li><strong>Continuous improvement:</strong> review this SOP quarterly.</li>
+            </ul>
+          </div>
+
+          <div class="failure-modes">
+            <h3>Common failure modes</h3>
+            <ul>
+              <li><strong>Hero fixing:</strong> jump to a patch without a minimal reproduction.</li>
+              <li><strong>Template skip:</strong> missing environment or impact — triage stalls.</li>
+              <li><strong>Fix without test:</strong> same bug returns next sprint.</li>
+              <li><strong>Close without prevention:</strong> no learning for the next person.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Do this now</h3>
+            <p>Write one sentence: <em>“The last bug that hurt us most was ___ because we lacked ___.”</em> You will reuse this in Module 4.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Checklist</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-progress="m1-c1" data-module="module-1" /><span>I can name the five goals of this process.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m1-c2" data-module="module-1" /><span>I can explain “reproducibility first.”</span></label></li>
+              <li><label><input type="checkbox" data-progress="m1-c3" data-module="module-1" /><span>I wrote my one-sentence “last painful bug” statement.</span></label></li>
+            </ul>
+          </div>
+
+          <div class="section-card self-check">
+            <h3>Self-check</h3>
+            <div class="self-check-item">
+              <p>Why is fixing without reproduction a failure mode?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc1-1">Show answer</button>
+              <div class="reveal-answer" id="sc1-1">You cannot verify the fix or write a regression test. You risk shipping a guess that does not address the real cause.</div>
+            </div>
+          </div>
+        </section>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

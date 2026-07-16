@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bug Handling SOP — Full course (print)</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+  <style>
+    .print-page .app { display: block; }
+    .print-page .sidebar, .print-page .overlay, .print-page .topbar { display: none !important; }
+    .print-page .main { margin: 0; max-width: 48rem; margin-inline: auto; padding: 1.5rem; }
+    .print-page .module { break-inside: avoid; margin-bottom: 2.5rem; page-break-after: always; }
+    .print-page .module:last-of-type { page-break-after: auto; }
+    @media print {
+      .no-print { display: none !important; }
+      .print-page .module { page-break-after: always; }
+    }
+  </style>
+</head>
+<body class="print-page" data-page="course-full" data-base="" data-file="course-full.html">
+  <div class="main">
+    <header class="topbar no-print" style="position:static;display:flex;justify-content:space-between;align-items:center;padding:1rem 0;margin-bottom:1rem">
+      <div class="topbar-title">Full course — print</div>
+      <button type="button" class="btn btn-primary btn-sm" id="printCourse">Print / Save as PDF</button>
+    </header>
+    <main class="content">
+      <section class="hero">
+        <span class="status-chip">Practical AI</span>
+        <h1>Bug Handling SOP</h1>
+        <p class="hero-lede">Full printable course (~90–120 min). Living SOP: docs/reference/BUG-HANDLING-SOP.md</p>
+      </section>
+
+      <section class="module">
+        <div class="module-header"><div class="module-badge">1</div><div><h2>Why good bug processes matter</h2><p class="module-time">~15 min</p></div></div>
+        <div class="section-card">
+          <h3>Goals</h3>
+          <ul>
+            <li>Reduce time-to-resolution</li>
+            <li>Improve reproducibility and root cause analysis</li>
+            <li>Enforce testing and prevent regressions</li>
+            <li>Build Cursor skills muscle memory</li>
+            <li>Measurable improvement in quality and velocity</li>
+          </ul>
+          <h3>Principles</h3>
+          <p>Reproducibility first · Skills-driven · Root cause + prevention · TDD + review mandatory · Improve quarterly</p>
+        </div>
+      </section>
+
+      <section class="module">
+        <div class="module-header"><div class="module-badge">2</div><div><h2>Reporting &amp; triage</h2><p class="module-time">~20 min</p></div></div>
+        <div class="section-card">
+          <h3>Template fields</h3>
+          <p>Title · Environment · Reproduction Steps · Expected · Actual · Logs/Screenshots · Business Impact</p>
+          <h3>Severity</h3>
+          <p><strong>P1</strong> triage 1h · <strong>P2</strong> 4h · <strong>P3</strong> minor · <strong>P4</strong> cosmetic</p>
+        </div>
+      </section>
+
+      <section class="module">
+        <div class="module-header"><div class="module-badge">3</div><div><h2>Diagnosis &amp; fixing</h2><p class="module-time">~30–40 min</p></div></div>
+        <div class="section-card">
+          <h3>Skills</h3>
+          <p><code>/diagnosing-bugs</code> then <code>/tdd</code></p>
+          <h3>Loop</h3>
+          <p>Reproduce → Minimize → Hypothesize → Instrument → Fix → Regression test</p>
+          <h3>Workflow</h3>
+          <ol>
+            <li>In Progress → diagnose → minimal repro → TDD fix → tests → document findings</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="module">
+        <div class="module-header"><div class="module-badge">4</div><div><h2>Review, closure &amp; prevention</h2><p class="module-time">~20–25 min</p></div></div>
+        <div class="section-card">
+          <ol>
+            <li>PR references ticket</li>
+            <li><code>/code-review</code></li>
+            <li>Ticket: <strong>Root Cause</strong> + <strong>Prevention</strong></li>
+            <li>QA verifies → close</li>
+          </ol>
+          <h3>Metrics</h3>
+          <p>Time to fix by severity · % with repro steps · % with regression tests · recurring rate · team feedback</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>

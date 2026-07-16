@@ -1,0 +1,13 @@
+---
+description: Bug Handling SOP course workspace boundaries — training repo only
+alwaysApply: true
+---
+
+# Bug Handling SOP course doctrine
+
+- **Write target:** `Practical-Office/bug-handling-sop` only.
+- **Do not** commit Bug Handling course/training/docs to `Book-IQ/bookiqv1-rc` or `Practical-Office/bml-onboarding`.
+- **Do not** edit BookIQ services, ledger, or live product bug issues from this workspace.
+- **Issue tracker:** `Practical-Office/bug-handling-sop` (see `docs/agents/issue-tracker.md`).
+- **Living SOP:** `docs/reference/BUG-HANDLING-SOP.md` is the process source of truth; keep modules aligned.
+- **Wayfinder:** one ticket per session; claim before work; refer by linked title.

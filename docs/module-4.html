@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 4 — Review, closure &amp; prevention | Bug Handling SOP</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/bug-handling.css" />
+</head>
+<body data-page="module-4" data-base="" data-file="module-4.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Module 4</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="resetProgress">Reset progress</button>
+        </div>
+      </header>
+      <main class="content" id="top">
+        <section class="module" id="module-4">
+          <div class="module-header">
+            <div class="module-badge">4</div>
+            <div>
+              <h2>Review, closure &amp; prevention</h2>
+              <p class="module-time">~20–25 min</p>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Code review &amp; closure</h3>
+            <ol>
+              <li>Open a PR with a clear description referencing the ticket.</li>
+              <li>Run <code>/code-review</code>.</li>
+              <li>Address all feedback.</li>
+              <li>Update the original ticket with:
+                <ul>
+                  <li><strong>Root Cause:</strong> detailed explanation</li>
+                  <li><strong>Prevention:</strong> what we will do to stop this class of bug</li>
+                </ul>
+              </li>
+              <li>QA verifies the fix.</li>
+              <li>Close ticket and PR.</li>
+            </ol>
+          </div>
+
+          <div class="section-card">
+            <h3>Metrics to track</h3>
+            <ul>
+              <li>Average time from report → fix (by severity)</li>
+              <li>% of bugs with reproduction steps</li>
+              <li>% of fixes with regression tests</li>
+              <li>Recurring bug rate</li>
+              <li>Team feedback on process</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h3>Updating the living SOP</h3>
+            <p>Suggested improvements or new skills should be proposed in a dedicated ticket on <code>Practical-Office/bug-handling-sop</code>. Approval: team lead + engineering manager. Edit <a href="https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md" target="_blank" rel="noopener noreferrer">BUG-HANDLING-SOP.md</a> once approved, then align course modules.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Post-training</h3>
+            <ul>
+              <li>Each engineer completes 1–2 bugs following the full process.</li>
+              <li>Monthly retro on bug process effectiveness.</li>
+            </ul>
+            <p>Reuse your Module 1 sentence: turn it into a <strong>Prevention</strong> note for a real or hypothetical ticket.</p>
+          </div>
+
+          <div class="section-card">
+            <h3>Checklist</h3>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-progress="m4-c1" data-module="module-4" /><span>I know the required Root Cause + Prevention fields.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m4-c2" data-module="module-4" /><span>I can name at least three process metrics.</span></label></li>
+              <li><label><input type="checkbox" data-progress="m4-c3" data-module="module-4" /><span>I wrote a Prevention note from my Module 1 sentence.</span></label></li>
+            </ul>
+          </div>
+
+          <div class="section-card self-check">
+            <h3>Self-check</h3>
+            <div class="self-check-item">
+              <p>What two fields must every closed bug include?</p>
+              <button type="button" class="btn btn-ghost btn-sm" data-reveal="sc4-1">Show answer</button>
+              <div class="reveal-answer" id="sc4-1">Root Cause and Prevention.</div>
+            </div>
+          </div>
+        </section>
+        <div class="page-nav no-print" id="pageNav"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/bug-handling.js"></script>
+</body>
+</html>
