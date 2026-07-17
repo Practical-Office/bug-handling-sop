@@ -49,7 +49,7 @@ https://practical-office.github.io/bug-handling-sop/
 
 1. Confirm GitHub Pages: **Settings → Pages → Deploy from branch → `main` / `/docs`**
 2. Open this folder in its own Cursor window
-3. Run first facilitated workshop; collect gaps on [First cohort workshop feedback](https://github.com/Practical-Office/bug-handling-sop/issues) (see wayfinder map)
+3. Run first facilitated workshop; collect gaps on [#19](https://github.com/Practical-Office/bug-handling-sop/issues/19)
 4. Keep wayfinder map updated on `Practical-Office/bug-handling-sop`
 5. Phase 0/1 rollout: [`docs/system-analysis-report.md`](docs/system-analysis-report.md)
 
