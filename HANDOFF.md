@@ -49,13 +49,15 @@ https://practical-office.github.io/bug-handling-sop/
 
 1. Confirm GitHub Pages: **Settings → Pages → Deploy from branch → `main` / `/docs`**
 2. Open this folder in its own Cursor window
-3. Wave 4: commit/push for Review; run Post-Publish QA (first cohort)
+3. Run first facilitated workshop; collect gaps on [First cohort workshop feedback](https://github.com/Practical-Office/bug-handling-sop/issues) (see wayfinder map)
 4. Keep wayfinder map updated on `Practical-Office/bug-handling-sop`
+5. Phase 0/1 rollout: [`docs/system-analysis-report.md`](docs/system-analysis-report.md)
 
 ---
 
 ## Agent entry points
 
 - [`AGENTS.md`](./AGENTS.md)
-- [`docs/agents/issue-tracker.md`](./docs/agents/issue-tracker.md)
+- [`docs/agents/issue-tracker.md`](docs/agents/issue-tracker.md)
+- [`docs/system-analysis-report.md`](docs/system-analysis-report.md)
 - [`.cursor/rules/`](./.cursor/rules/)

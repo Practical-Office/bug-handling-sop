@@ -1,0 +1,36 @@
+name: SOP / course change
+description: Propose a change to the Living SOP or Published Course
+title: "[SOP] "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or gap
+      description: What is wrong or missing in the current process or course?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Wording, module, or workflow change
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: surfaces
+    attributes:
+      label: Surfaces to update
+      options:
+        - label: Living SOP (`docs/reference/BUG-HANDLING-SOP.md`)
+        - label: Published Course HTML modules
+        - label: Issue templates / triage labels
+        - label: Exercise Lab
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale / evidence
+      description: Cohort feedback, peer research, or real bug miss

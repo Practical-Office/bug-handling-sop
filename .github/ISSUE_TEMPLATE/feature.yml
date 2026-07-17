@@ -1,0 +1,55 @@
+name: Feature / work item
+description: Course, docs, or tooling work (not a defect)
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What changes when this is done?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] …
+    validations:
+      required: true
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      options:
+        - S (preferred)
+        - M
+        - L
+    validations:
+      required: true
+
+  - type: dropdown
+    id: hitl
+    attributes:
+      label: HITL vs AFK
+      description: Human-in-the-loop or agent-ready after triage
+      options:
+        - ready-for-human
+        - ready-for-agent
+    validations:
+      required: true
+
+  - type: input
+    id: blocked_by
+    attributes:
+      label: Blocked by
+      description: Issue links or "none"
+
+  - type: textarea
+    id: test_plan
+    attributes:
+      label: Test plan
+      description: How will we verify this shipped?

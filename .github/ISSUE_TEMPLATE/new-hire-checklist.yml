@@ -1,0 +1,44 @@
+name: New hire onboarding checklist
+description: Track Practical AI onboarding path (BML + Bug Handling + first real work)
+title: "[ONBOARD] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Week path:** skills Setup → [BML overview](https://practical-office.github.io/bml-onboarding/) → [Bug Handling course](https://practical-office.github.io/bug-handling-sop/) → Evidence Pack → 1 mentored PR + Homework F on product backlog.
+
+        **Boards:** [Team Work](https://github.com/orgs/Practical-Office/projects/2) · [Bug Report](https://github.com/orgs/Practical-Office/projects/1)
+
+  - type: input
+    id: hire_name
+    attributes:
+      label: New hire name
+    validations:
+      required: true
+
+  - type: input
+    id: mentor
+    attributes:
+      label: Mentor / lead reviewer
+    validations:
+      required: true
+
+  - type: input
+    id: start_date
+    attributes:
+      label: Start date
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Matt skills installed (`npx skills@latest add mattpocock/skills`)
+        - label: `/setup-matt-pocock-skills` run on product clone
+        - label: BML course started or completed (Modules 1–2 minimum)
+        - label: Bug Handling Setup + Modules 1–5 complete
+        - label: Exercise Lab — `npm run phase1` red then green
+        - label: Evidence Pack submitted for lead review
+        - label: Homework F — 1 real bug end-to-end on product backlog
+        - label: First mentored PR merged

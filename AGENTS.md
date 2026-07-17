@@ -42,4 +42,5 @@ Use Matt/Cursor skills: `/diagnosing-bugs`, `/tdd`, `/code-review`, `/grill-with
 | `docs/course-full.html` | Printable full course |
 | `docs/certification.html` | Evidence Pack certification |
 | `docs/reference/BUG-HANDLING-SOP.md` | Living SOP (source of truth) |
-| `.github/ISSUE_TEMPLATE/bug-report.md` | Teaching copy of bug report template |
+| `docs/system-analysis-report.md` | Systems & ops analysis; Phase 0/1 rollout plan |
+| `.github/ISSUE_TEMPLATE/` | Bug, feature, SOP-change, new-hire issue forms |

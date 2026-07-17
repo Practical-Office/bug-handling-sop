@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Living SOP (process source of truth)
+    url: https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/reference/BUG-HANDLING-SOP.md
+    about: Read before filing SOP or process questions
+  - name: Security policy
+    url: https://github.com/Practical-Office/bug-handling-sop/blob/main/SECURITY.md
+    about: Do not paste exploit details in public issues
+  - name: Bug Report board
+    url: https://github.com/orgs/Practical-Office/projects/1
+    about: Kanban for bug intake (class examples + mirrored product bugs)
+  - name: Team Work board
+    url: https://github.com/orgs/Practical-Office/projects/2
+    about: Kanban for all team work (BML, updates, bugs)

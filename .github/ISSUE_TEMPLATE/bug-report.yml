@@ -1,0 +1,85 @@
+name: Bug report
+description: Standardized bug report (mirrors Living SOP §4)
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Security:** Do not paste exploit details, secrets, or attack steps. Use [private vulnerability reporting](https://github.com/Practical-Office/bug-handling-sop/blob/main/SECURITY.md) when applicable.
+
+        Triage applies exactly one category, one state, plus `severity/s*` and `priority/p*`. See [triage-labels.md](https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/agents/triage-labels.md).
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser/OS, backend version, user role, device, network, etc.
+      placeholder: |
+        - Browser / OS / Version:
+        - Backend / API version:
+        - User role / permissions:
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Short, reliable steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs / screenshots / video
+      description: Attach or link evidence
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Business / user impact
+      description: Who is affected; note any workaround (or "no workaround")
+    validations:
+      required: true
+
+  - type: dropdown
+    id: suggested_severity
+    attributes:
+      label: Suggested severity (optional — triage confirms)
+      options:
+        - (none)
+        - severity/s1
+        - severity/s2
+        - severity/s3
+        - severity/s4
+
+  - type: dropdown
+    id: suggested_priority
+    attributes:
+      label: Suggested priority (optional — triage confirms)
+      options:
+        - (none)
+        - priority/p0
+        - priority/p1
+        - priority/p2
+        - priority/p3
