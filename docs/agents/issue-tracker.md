@@ -50,7 +50,7 @@ Track **BML**, **Update**, and **Bug** work **per assignee**:
 4. **Kanban — by status** — group by Status, **slice by Assignees** to see who owns each column
 5. **Bug** type → also add to Bug Report board when triage tracking is needed
 
-Full view setup (UI): [`team-work-board.md`](team-work-board.md)
+Full view setup (UI): [`team-work-board.md`](team-work-board.md). Short project readme (paste into GitHub Project): [`scripts/team-work-project-readme.md`](../../scripts/team-work-project-readme.md)
 
 ### Product bugs
 

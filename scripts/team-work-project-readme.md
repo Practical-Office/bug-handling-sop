@@ -1,8 +1,8 @@
 # Team Work board
 
-**Purpose:** Track each teammate’s **BML**, **Update**, and **Bug** work in one place.
+**Purpose:** Track each teammate’s **BML**, **Update**, and **Bug** work in one place. Paste this into the [Team Work](https://github.com/orgs/Practical-Office/projects/2) project readme field; full view setup lives in the repo.
 
-**Related board:** [Bug Report](https://github.com/orgs/Practical-Office/projects/1) — defect triage lifecycle (add Bug cards there too).
+**Related:** [Bug Report](https://github.com/orgs/Practical-Office/projects/1) — defect triage lifecycle (add Bug cards there too). Org boards overview: [issue-tracker.md](https://github.com/Practical-Office/bug-handling-sop/blob/main/docs/agents/issue-tracker.md).
 
 ## Ticket Type (required on every card)
 

@@ -2,6 +2,8 @@
 
 Configure [Team Work](https://github.com/orgs/Practical-Office/projects/2) so each teammate’s **BML**, **Update**, and **Bug** work is visible. GitHub does not expose view creation via API — an org admin applies these steps once in the project UI.
 
+**See also:** [`issue-tracker.md`](issue-tracker.md) (org boards + daily use) · [`setup.html`](../setup.html) (course Step 3) · [`scripts/team-work-project-readme.md`](../../scripts/team-work-project-readme.md) (short readme to paste into the GitHub Project)
+
 **Prerequisites:** Project fields **Ticket Type** (BML | Update | Bug), **Status**, **Priority**, and **Assignees** already exist.
 
 **Org members (2026-07):** `james-p-ai`, `rich-p-ai`, `zmac22` — extend views when headcount grows.

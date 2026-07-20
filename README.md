@@ -28,7 +28,7 @@ bug-handling-sop/
 │   ├── next-steps.html
 │   ├── css/bug-handling.css
 │   ├── js/bug-handling.js
-│   ├── agents/                 ← issue-tracker + triage-labels for agents
+│   ├── agents/                 ← issue-tracker, team-work-board, triage-labels
 │   ├── reference/
 │   │   ├── BUG-HANDLING-SOP.md ← living SOP (edit as we grow)
 │   │   ├── WORKSHOP-AGENDA.md
@@ -63,4 +63,4 @@ Edit the living SOP when process changes. Keep modules aligned with the SOP. Pro
 
 **Agent / Cursor:** See [`AGENTS.md`](./AGENTS.md) and [`HANDOFF.md`](./HANDOFF.md). Issues: `Practical-Office/bug-handling-sop`.
 
-**Team boards:** [Bug Report](https://github.com/orgs/Practical-Office/projects/1) · [Team Work](https://github.com/orgs/Practical-Office/projects/2) — see Setup page and [`docs/agents/issue-tracker.md`](docs/agents/issue-tracker.md).
+**Team boards:** [Bug Report](https://github.com/orgs/Practical-Office/projects/1) · [Team Work](https://github.com/orgs/Practical-Office/projects/2) — per-member BML / Update / Bug: [`docs/agents/team-work-board.md`](docs/agents/team-work-board.md); org overview: [`docs/agents/issue-tracker.md`](docs/agents/issue-tracker.md) and Setup [`docs/setup.html`](docs/setup.html).

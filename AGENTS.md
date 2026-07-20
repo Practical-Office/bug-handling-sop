@@ -10,6 +10,8 @@ Ship and maintain a public **Bug Handling** onboarding course (GitHub Pages + li
 
 All wayfinder map tickets and course work issues live on **`Practical-Office/bug-handling-sop`**. See [`docs/agents/issue-tracker.md`](docs/agents/issue-tracker.md).
 
+**Team Work** ([org project 2](https://github.com/orgs/Practical-Office/projects/2)): per-teammate **BML | Update | Bug** tracking — view setup in [`docs/agents/team-work-board.md`](docs/agents/team-work-board.md).
+
 Product bugs and live BookIQ issues stay on **`Book-IQ/bookiqv1-rc`** (or the owning product repo) — out of scope for this workspace unless explicitly scoped.
 
 ## Hard rules
@@ -43,4 +45,6 @@ Use Matt/Cursor skills: `/diagnosing-bugs`, `/tdd`, `/code-review`, `/grill-with
 | `docs/certification.html` | Evidence Pack certification |
 | `docs/reference/BUG-HANDLING-SOP.md` | Living SOP (source of truth) |
 | `docs/system-analysis-report.md` | Systems & ops analysis; Phase 0/1 rollout plan |
+| `docs/agents/issue-tracker.md` | GitHub Issues + org boards (Bug Report, Team Work) |
+| `docs/agents/team-work-board.md` | Team Work views: per-member BML / Update / Bug |
 | `.github/ISSUE_TEMPLATE/` | Bug, feature, SOP-change, new-hire issue forms |
