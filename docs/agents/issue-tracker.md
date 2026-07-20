@@ -18,7 +18,7 @@ Infer the repo from `git remote -v` when run inside this clone (`Practical-Offic
 | Board | URL | Purpose |
 | --- | --- | --- |
 | **Bug Report** | https://github.com/orgs/Practical-Office/projects/1 | Bug lifecycle: Needs Triage → Needs Info → Ready → In Progress → Done |
-| **Team Work** | https://github.com/orgs/Practical-Office/projects/2 | All team work; Ticket Type: BML \| Update \| Bug |
+| **Team Work** | https://github.com/orgs/Practical-Office/projects/2 | Per-teammate BML \| Update \| Bug; see [`team-work-board.md`](team-work-board.md) |
 
 ### Bug Report columns (Status)
 
@@ -42,9 +42,15 @@ Configure in GitHub Projects UI (org admin):
 
 ### Daily use (Team Work)
 
-1. Filter **Assignees** = me → **In Progress** = current work
-2. **Ready** sorted by Priority = next up
-3. Set **Ticket Type** on every card
+Track **BML**, **Update**, and **Bug** work **per assignee**:
+
+1. Every card: **Assignees** (one owner) + **Ticket Type** (BML | Update | Bug) + **Status**
+2. **My work** view — filter `assignee:@me -status:Done`; In Progress = current work
+3. **Team roster** table — group by **Assignees**; columns include Ticket Type and Priority
+4. **Kanban — by status** — group by Status, **slice by Assignees** to see who owns each column
+5. **Bug** type → also add to Bug Report board when triage tracking is needed
+
+Full view setup (UI): [`team-work-board.md`](team-work-board.md)
 
 ### Product bugs
 
