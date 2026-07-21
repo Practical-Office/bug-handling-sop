@@ -2,79 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>/triage — Cursor skill · Bug Handling SOP</title>
-  <meta name="description" content="Route bug reports: category, triage state, Severity, Priority, and ready-for-agent vs ready-for-human." />
-  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/bug-handling.css" />
+  <meta http-equiv="refresh" content="0; url=https://practical-office.github.io/dev-sops/skills/triage.html" />
+  <link rel="canonical" href="https://practical-office.github.io/dev-sops/skills/triage.html" />
+  <title>/triage moved to Dev SOPs hub</title>
 </head>
-<body data-page="skill-triage" data-base="../" data-file="skills/triage.html">
-  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
-  <div class="app">
-    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
-    <div class="main">
-      <header class="topbar no-print">
-        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div class="topbar-title">Skill: /triage</div>
-        <div class="topbar-actions"></div>
-      </header>
-      <main class="content" id="top">
-        <section class="skill-hero module">
-          <div class="module-header">
-            <div class="module-badge">/triage</div>
-            <div>
-              <h2>Triage</h2>
-              <p class="module-time">Bug skill · after report · before diagnosis</p>
-            </div>
-          </div>
-          <p>Confirm the claim, set Severity and Priority separately, pick a Triage State, and route to human or agent — without starting diagnosis on incomplete tickets.</p>
-          <div class="pill-row">
-            <a class="pill" href="../module-2.html">← Module 2: Triage</a>
-            <a class="pill" href="grill-with-docs.html">/grill-with-docs</a>
-            <a class="pill" href="diagnosing-bugs.html">/diagnosing-bugs</a>
-          </div>
-        </section>
-
-        <div class="content-block">
-          <h3>Why</h3>
-          <p>Severity is impact; Priority is scheduling. Mixing them burns capacity. Triage also decides whether the ticket is ready for work or needs more info.</p>
-        </div>
-
-        <div class="content-block">
-          <h3>When</h3>
-          <ul>
-            <li>A new bug report lands (or returns from <code>needs-info</code>)</li>
-            <li>Reporter suggested Severity/Priority — triage confirms or changes</li>
-            <li>Category might be enhancement, not bug — route correctly</li>
-          </ul>
-        </div>
-
-        <div class="content-block">
-          <h3>What triage sets</h3>
-          <ul>
-            <li><strong>Category</strong> — exactly one: <code>bug</code> or <code>enhancement</code></li>
-            <li><strong>Severity</strong> — <code>severity/s1</code> … <code>severity/s4</code> (workaround-aware)</li>
-            <li><strong>Priority</strong> — <code>priority/p0</code> … <code>priority/p3</code></li>
-            <li><strong>State</strong> — <code>needs-triage</code> · <code>needs-info</code> · <code>ready-for-agent</code> · <code>ready-for-human</code> · <code>wontfix</code></li>
-          </ul>
-          <p>Work starts only at <code>ready-for-agent</code> or <code>ready-for-human</code>.</p>
-        </div>
-
-        <div class="failure-modes">
-          <h3>Failure modes</h3>
-          <ul>
-            <li>Starting <code>/diagnosing-bugs</code> while still <code>needs-info</code></li>
-            <li>Collapsing Severity and Priority into one P1–P4 scale</li>
-            <li>Guessing missing template fields instead of grilling or returning</li>
-          </ul>
-        </div>
-      </main>
-      <div class="page-nav no-print" id="pageNav"></div>
-    </div>
-  </div>
-  <script src="../js/bug-handling.js"></script>
+<body>
+  <p>Skill pages live on the <a href="https://practical-office.github.io/dev-sops/skills/triage.html">Dev SOPs hub</a>.</p>
 </body>
 </html>
