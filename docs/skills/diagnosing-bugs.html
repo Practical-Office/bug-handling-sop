@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>/diagnosing-bugs — Cursor skill · Bug Handling SOP</title>
+  <meta name="description" content="Six-phase Diagnosis Loop for production bugs: feedback loop, reproduce, hypothesize, instrument, fix, cleanup." />
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/bug-handling.css" />
+</head>
+<body data-page="skill-diagnosing-bugs" data-base="../" data-file="skills/diagnosing-bugs.html">
+  <div class="overlay" id="navOverlay" aria-hidden="true"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Course navigation"></aside>
+    <div class="main">
+      <header class="topbar no-print">
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="topbar-title">Skill: /diagnosing-bugs</div>
+        <div class="topbar-actions"></div>
+      </header>
+      <main class="content" id="top">
+        <section class="skill-hero module">
+          <div class="module-header">
+            <div class="module-badge">/diagnosing-bugs</div>
+            <div>
+              <h2>Diagnosis Loop</h2>
+              <p class="module-time">Bug skill · after triage · before /tdd fix</p>
+            </div>
+          </div>
+          <p>Six-phase loop that turns a confirmed bug into a root cause and a regression-ready fix path. Reproducibility first — do not patch until you have a red signal.</p>
+          <div class="pill-row">
+            <a class="pill" href="../module-3.html">← Module 3: Diagnosis</a>
+            <a class="pill" href="triage.html">/triage</a>
+            <a class="pill" href="tdd.html">/tdd</a>
+          </div>
+        </section>
+
+        <div class="content-block">
+          <h3>Why</h3>
+          <p>Guess-and-patch creates regressions. The Diagnosis Loop forces a deterministic feedback command, a minimized reproduce, ranked hypotheses, and one-variable instrumentation before the fix.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>When</h3>
+          <ul>
+            <li>Triage State is <code>ready-for-agent</code> or <code>ready-for-human</code></li>
+            <li>Bug report template is complete (or grilled to completion)</li>
+            <li>You are about to change production code for a defect</li>
+          </ul>
+          <p><strong>Skip</strong> only for trivial typos with an obvious red test already in hand — still run a minimal reproduce.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>Six phases</h3>
+          <ol>
+            <li><strong>Feedback loop</strong> — one red-capable, deterministic command</li>
+            <li><strong>Reproduce + minimise</strong> — shrink until every step is load-bearing</li>
+            <li><strong>Hypothesise</strong> — 3–5 ranked, falsifiable hypotheses</li>
+            <li><strong>Instrument</strong> — one variable at a time; tagged probes</li>
+            <li><strong>Fix + regression test</strong> — prefer test-before-fix at a correct seam; hand off to <a href="tdd.html"><code>/tdd</code></a></li>
+            <li><strong>Cleanup + post-mortem</strong> — green loop, remove debug harnesses, ticket RCA notes</li>
+          </ol>
+        </div>
+
+        <div class="failure-modes">
+          <h3>Failure modes</h3>
+          <ul>
+            <li>Fixing before a reliable red signal</li>
+            <li>Skipping minimise — debugging the whole system at once</li>
+            <li>Jumping to <code>/implement</code> or a bare PR without diagnosis notes</li>
+          </ul>
+        </div>
+      </main>
+      <div class="page-nav no-print" id="pageNav"></div>
+    </div>
+  </div>
+  <script src="../js/bug-handling.js"></script>
+</body>
+</html>

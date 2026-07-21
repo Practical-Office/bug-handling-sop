@@ -12,6 +12,19 @@
 
   const SETUP = { id: "setup", href: "setup.html", num: "⚙", label: "Setup", meta: "15m" };
 
+  const SKILLS_CORE = [
+    { id: "skill-diagnosing-bugs", href: "skills/diagnosing-bugs.html", label: "diagnosing-bugs" },
+    { id: "skill-tdd", href: "skills/tdd.html", label: "tdd" },
+    { id: "skill-code-review", href: "skills/code-review.html", label: "code-review" },
+  ];
+
+  const SKILLS_OPTIONAL = [
+    { id: "skill-triage", href: "skills/triage.html", label: "triage" },
+    { id: "skill-grill-with-docs", href: "skills/grill-with-docs.html", label: "grill-with-docs" },
+    { id: "skill-grilling", href: "skills/grilling.html", label: "grilling" },
+    { id: "skill-wayfinder", href: "skills/wayfinder.html", label: "wayfinder" },
+  ];
+
   const REFERENCE = [
     { id: "next-steps", href: "next-steps.html", num: "→", label: "Next steps" },
     { id: "certification", href: "certification.html", num: "✓", label: "Certification" },
@@ -31,10 +44,14 @@
     "index.html",
     SETUP.href,
     ...MODULES.map((m) => m.href),
+    ...SKILLS_CORE.map((s) => s.href),
+    ...SKILLS_OPTIONAL.map((s) => s.href),
     "next-steps.html",
     "certification.html",
     "quick-reference.html",
   ];
+
+  const HUB_URL = "https://practical-office.github.io/dev-sops/";
 
   const BUG_TEMPLATE = `**Title:** [Clear, concise description]
 
@@ -136,6 +153,16 @@
         `<a class="nav-link${pageId === m.id ? " is-active" : ""}" data-module="${m.id}" href="${href(m.href)}"><span class="nav-num">${m.num}</span> ${m.label} <span class="nav-meta">${m.meta}</span></a>`
     ).join("");
 
+    const skillCoreLinks = SKILLS_CORE.map(
+      (s) =>
+        `<a class="nav-link${pageId === s.id ? " is-active" : ""}" data-module="${s.id}" href="${href(s.href)}"><span class="nav-num">/</span> ${s.label}</a>`
+    ).join("");
+
+    const skillOptionalLinks = SKILLS_OPTIONAL.map(
+      (s) =>
+        `<a class="nav-link${pageId === s.id ? " is-active" : ""}" data-module="${s.id}" href="${href(s.href)}"><span class="nav-num">·</span> ${s.label}</a>`
+    ).join("");
+
     const refLinks = REFERENCE.map(
       (r) =>
         `<a class="nav-link${pageId === r.id ? " is-active" : ""}" data-module="${r.id}" href="${href(r.href)}"><span class="nav-num">${r.num}</span> ${r.label}</a>`
@@ -160,12 +187,16 @@
       </div>
       <nav class="sidebar-nav">
         <p class="nav-section-label">Start</p>
+        <a class="nav-link" href="${HUB_URL}"><span class="nav-num">←</span> Back to hub</a>
         <a class="nav-link${pageId === "hub" ? " is-active" : ""}" data-module="hub" href="${href("index.html")}"><span class="nav-num">⌂</span> Course hub</a>
-        <a class="nav-link" href="https://practical-office.github.io/dev-sops/" target="_blank" rel="noopener noreferrer"><span class="nav-num">◎</span> All SOPs</a>
         <a class="nav-link${pageId === "quick-reference" ? " is-active" : ""}" data-module="quick-reference" href="${href("quick-reference.html")}"><span class="nav-num">⚡</span> Quick reference</a>
         <a class="nav-link${pageId === SETUP.id ? " is-active" : ""}" data-module="${SETUP.id}" href="${href(SETUP.href)}"><span class="nav-num">${SETUP.num}</span> ${SETUP.label} <span class="nav-meta">${SETUP.meta}</span></a>
         <p class="nav-section-label">Modules</p>
         ${moduleLinks}
+        <p class="nav-section-label">Bug skills (required)</p>
+        ${skillCoreLinks}
+        <p class="nav-section-label">Intake &amp; optional</p>
+        ${skillOptionalLinks}
         <p class="nav-section-label">Reference</p>
         ${refLinks}
         <a class="nav-link" href="${href("course-full.html")}"><span class="nav-num">PDF</span> Save as PDF</a>
@@ -178,6 +209,17 @@
         <a href="https://p-ai.net" target="_blank" rel="noopener noreferrer">p-ai.net</a>
       </div>`;
     sidebar.dataset.built = "1";
+  }
+
+  function injectHubButton() {
+    const actions = document.querySelector(".topbar-actions");
+    if (!actions || actions.querySelector("[data-hub-back]")) return;
+    const a = document.createElement("a");
+    a.className = "btn btn-ghost btn-sm";
+    a.href = HUB_URL;
+    a.dataset.hubBack = "1";
+    a.textContent = "← Back to hub";
+    actions.prepend(a);
   }
 
   function setupPrevNext() {
@@ -297,6 +339,7 @@
 
   if (!isPrintPage) {
     buildSidebar();
+    injectHubButton();
     setupPrevNext();
     bindChecks();
     bindMobileNav();
