@@ -4,17 +4,14 @@
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
 
 FORBIDDEN_SUBSTRINGS = [
     "ISSUE_TEMPLATE/bug-report.md",
 ]
-
-HREF_SRC_RE = re.compile(r'''(?:href|src)=["']([^"']+)["']''')
 
 
 class _LinkParser(HTMLParser):
@@ -71,10 +68,6 @@ def check_docs(docs_dir: Path) -> list[str]:
                 continue
             if not _local_target_exists(docs_dir, html_path, url):
                 errors.append(f"{rel_page}: {kind} {url!r} does not resolve under docs/")
-
-    index = docs_dir / "reference" / "issues" / "index.html"
-    if not index.is_file():
-        pass  # bml-onboarding only
 
     return errors
 
