@@ -17,6 +17,7 @@
 | Learners | Complete **Setup Pre-req** (`setup.html`) — skills installed, `/setup-matt-pocock-skills` run once |
 | Facilitator | Clone repo; smoke Exercise Lab red command; open hub + Modules 1–5 locally or on Pages |
 | Facilitator | Print or share [`quick-reference.html`](../quick-reference.html) |
+| Facilitator | Open [`evidence-pack-samples.md`](./evidence-pack-samples.md) for Block 6 — do not hand to learners as submit templates |
 
 If Setup is incomplete for most of the room, spend Block 0 verifying installs before Module 1.
 
@@ -87,6 +88,7 @@ If Setup is incomplete for most of the room, spend Block 0 verifying installs be
 
 - End-to-end skill sequence on the whiteboard or quick-ref.
 - Evidence Pack requirements (report/Exercise A · Phase 1 output · RCA+Prevention · lead review).
+- Demo with [`evidence-pack-samples.md`](./evidence-pack-samples.md) (Sample 1 default; Sample 2 for real-ticket contrast).
 - Homework F: 1–2 real bugs; bring Phase 1 + Prevention to monthly retro.
 - Point to Living SOP for ongoing updates.
 
@@ -109,6 +111,7 @@ If Setup is incomplete for most of the room, spend Block 0 verifying installs be
 - [ ] https://practical-office.github.io/bug-handling-sop/ (or local `python3 -m http.server 4174` in `docs/`)
 - [ ] `docs/setup.html`, `module-1.html` … `module-5.html`, `certification.html`, `quick-reference.html`
 - [ ] `exercises/invoice-api` README + Phase 1 red command verified
+- [ ] [`evidence-pack-samples.md`](./evidence-pack-samples.md) bookmarked for Block 6
 - [ ] Living SOP open for “source of truth” questions
 - [ ] Timer visible; parking lot for SOP change proposals (file tickets on `Practical-Office/bug-handling-sop`)
 
