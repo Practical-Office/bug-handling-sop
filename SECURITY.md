@@ -10,4 +10,4 @@ This repository is a **Bug Handling SOP training course**, not a production appl
 
 ## Course reference
 
-The Published Course teaches the private advisory path in Module 2 (Triage). See the Living SOP §6.6 and `.github/ISSUE_TEMPLATE/bug-report.md`.
+The Published Course teaches the private advisory path in Module 2 (Triage). See the Living SOP §6.6 and `.github/ISSUE_TEMPLATE/bug-report.yml`.

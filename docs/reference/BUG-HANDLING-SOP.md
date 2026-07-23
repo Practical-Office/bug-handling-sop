@@ -14,7 +14,7 @@
 | ADR (Five-Module D-stack) | [`docs/adr/0001-five-module-d-stack-course.md`](../adr/0001-five-module-d-stack-course.md) |
 | Triage label map | [`docs/agents/triage-labels.md`](../agents/triage-labels.md) |
 | Issue tracker | [`docs/agents/issue-tracker.md`](../agents/issue-tracker.md) |
-| Teaching bug template | [`.github/ISSUE_TEMPLATE/bug-report.md`](../../.github/ISSUE_TEMPLATE/bug-report.md) |
+| Teaching bug template | [`.github/ISSUE_TEMPLATE/bug-report.yml`](../../.github/ISSUE_TEMPLATE/bug-report.yml) |
 | Published Course | https://practical-office.github.io/bug-handling-sop/ |
 | Peer triage research | [`docs/research/peer-bug-triage-sops.md`](../research/peer-bug-triage-sops.md) |
 
@@ -105,7 +105,7 @@ All bug reports **must** use this template. Incomplete tickets are returned or m
 - Note workarounds (or “no workaround”) — they affect Severity.
 - Use `/grill-me` or `/grill-with-docs` with the reporter when the story is incomplete.
 
-Teaching copy of this template: [`.github/ISSUE_TEMPLATE/bug-report.md`](../../.github/ISSUE_TEMPLATE/bug-report.md).
+Teaching copy of this template: [`.github/ISSUE_TEMPLATE/bug-report.yml`](../../.github/ISSUE_TEMPLATE/bug-report.yml).
 
 ---
 
